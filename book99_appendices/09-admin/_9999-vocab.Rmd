@@ -1,0 +1,72 @@
+# Glossary - to do
+
+
+Code to organize glossary_raw.rmd file
+
+See https://yongfu.name/2018/10/24/glossary-maker.html#Source-Code
+```{r}
+file. <- here::here("book99_appendices/09-admin/9999-glossary_raw.Rmd")
+
+exists(file.)
+list.files(here::here("book99_appendices/09-admin/"))
+
+sort_def_list(file.)
+
+```
+
+
+## Bioinformatics glossary links
+
+https://discoveringthegenome.org/glossary/Bioinformatics
+http://www.informatics.jax.org/glossary
+http://rosalind.info/glossary/
+https://rpubs.com/k8huebner/335128
+
+## Glossary
+
+software
+library
+syntax
+quoted text
+Git
+GitHub
+repository
+repo
+software repository
+software developers
+developers
+open source
+CRAN
+source code
+source (verb)
+development version (of software)
+version control
+.csv
+.xls
+.xlsx
+spreadsheet
+GUI
+point-and-click interface
+working directory
+
+
+## Functions
+setwd
+getwd
+list.files
+read.csv
+ls
+dim(), names() and  summary()
+install.packages()
+RCurl::getURL()
+scatter.smooth
+
+
+
+
+
+
+bioinformatics
+computational biology
+literate programming
+

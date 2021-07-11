@@ -1,0 +1,36 @@
+# Scatter plots
+
+```{r}
+library(compbio4all)
+```
+
+
+## Checkpoint: Plot the data
+
+Load the data and make a plot that matches Figure 2.8 on page 26 of the Higgs and Atwood chapter 2 reading
+
+In order to make this plot, you will have to
+
+* Read Chapter 
+* Examine Figure 2.8 carefully
+* Examine Table 1 of Higgs 2009, especially the notes at the bottom of the table under the data themselves
+* Use the basic R code below and change the variables being plotted
+* Label the axes as in Chapte 2.
+* Render your plot to RPubs, screen grab it, and submit it.
+* Contact me AND your UTA if/when you run into trouble.
+* The UTAs and I all have office hours on Monday
+
+The plot() function is set up to make a blank plot.  text() then uses the same tilda notation as plot() to plot the labels.
+
+```{r}
+par(mfrow = c(1,1))
+plot(polar.req  ~ freq, data = aa_dat,
+     xlab = "label here",
+     ylab = "label here",
+     main = "title here",
+     col = 0)
+text(polar.req ~ freq, 
+     labels = aa, 
+     data = aa_dat, 
+     col = 1:20)
+```

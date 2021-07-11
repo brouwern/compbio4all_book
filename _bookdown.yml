@@ -1,0 +1,6 @@
+book_filename: "compbio4all-book"
+delete_merged_file: true
+rmd_subdir: true
+language:
+  ui:
+    chapter_name: "Chapter "

@@ -1,0 +1,93 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+
+# Create book infrastructure
+
+https://bookdown.org/yihui/bookdown/get-started.html
+
+
+
+## Change index.rmd
+
+* Title
+* Author
+* Description
+
+## Update README.md
+
+## Update _output.yml
+
+Changes basic features of this file as needed
+
+
+## Use subdirectories
+
+To oranize .rmd files in subdirectories change _bookdown.yml to include
+```{r, eval = F}
+rmd_subdir: true
+```
+
+
+
+## Keep the merge file 
+
+For reference this can be useful
+
+in _bookdown.yml chane
+delete_merged_file: true
+
+
+## Workflow
+
+### Build book
+
+Use "Build book" button on Build tab of Env / Hist / Connections / Build / Tutorial
+
+### Clean up if needed
+
+```{r, eval = F}
+rmarkdown::clean_site(preview = FALSE)
+```
+
+## Set up options for entire
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      fig.height = 3, 
+                      fig.width = 6, 
+                      warning = FALSE,
+                      message = FALSE,
+                      error = FALSE)
+suppressMessages(library(ggplot2))
+suppressMessages(library(ggpubr))
+
+packageStartupMessage(library(ggplot2))
+packageStartupMessage(library(ggpubr))
+
+```
+
+
+## Skip files
+
+put underscore in front of file name, eg.
+
+_skipme.Rmd
+
+## Suppress warnings etc
+
+In chunk:
+message=FALSE, warning=FALSE
+
+suppressMessages(library(foo))
+
+## Do not stop on error
+
+https://bookdown.org/yihui/rmarkdown-cookbook/opts-error.html
+
+```{r, error=TRUE}
+1 + "a"
+```

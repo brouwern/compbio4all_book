@@ -1,0 +1,89 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+Expressing exponential population growth in terms of r_d
+There are multiple related ways of writing out equations to express population growth.  The form we use will depend on exactly what our goals are and how we want to think about the biology.  For example, if we want, we can take our equation with lambda
+N_{t+1}=\lambda*N_t        
+
+And re-write it in terms of a new parameter, r_d
+N_{t+1}=(1+r_d )*N_t
+Both of these equations tell us about N.t.1,m so we can combine them
+\lambda*N_t=(1+r_d )*N_t                   
+We can factor out N.t, which gives us                     
+\lambda=1+r_d_
+r_d is called the discrete growth factor.  The “discrete” part has to do with the fact that we are thinking about our population in terms of discrete time steps: the passage of one year.  We are therefore setting up our model in terms of discrete time.  This is a good way to think about organisms that have a single breeding season each year, such as deer and birds.  In contrast, other organisms such as humans don’t have defined breeding seasons and so can reproduce continuously throughout the year.  Model of humans are therefore set up in terms of continuous time using a slightly different framework than what we are doing here.  If we wanted to, we could model human populations using a discrete time model, but this would be a simplification of human life history.  Make simplifications, though is a key part of modeling!
+[what is the “Growth factor” part of it…]
+Returning to the equation N_{t+1}=(1+r_d )*N_t, we can multiple our population size N_t through the (1+r_d )  term and arrive at a slightly different version of the equation:
+N_{t+1}=N_t+ N_t*r_d       (9)    
+One reason why we switch around how the equation is framed is to set up an extension of the exponential growth model that incorporates an important concept in ecology: a population’s carrying capacity, which is typically represented with the letter K.
+Focusing on the rate of population change
+Frequently we want to focus our attention just on how much a population changes over a single time step, such as one year.    Starting with this
+N_{t+1}=N_t+ N_t*r_d
+We redefine the N_t*r_d part as \DeltaN.  That is
+\DeltaN= N_t*r_d, 
+The symbol \Delta  is the Greek letter Delta, which is used across the sciences to represent change.  We can therefore substitute \DeltaN for N_t*r_d and re-write equation (9) as
+N_{t+1}=N_t+ \DeltaN
+That is, the population at the next time step (N_{t+1}) equals the population now (N_t) plus how much the population is going to change over the course of one time step (\DeltaN).
+As I said initially, we often just want to think about how much change is happening, so we focus on this equation
+\DeltaN= N_t*r_d                                                                                (10)    
+As mentioned above, we are setting up our models here on the basis of discrete time.  Therefore “\DeltaN" means how much the population (N) change (\Delta) over a discrete time step; in particular, over one year. 
+Because \DeltaNis the difference between two population sizes it is referred to as a difference equation (similar but not the same as a differential equation).
+Many books focus not on discrete-time models but continuous-time models.  Instead of  \DeltaN= N_t*r_d they frequently present a very similar equation as their focus:
+dN/dt=N_t*r_                                                                                  (11)    
+The part on the left dN/dt comes from calculus and, similar to \DeltaN indicates that we are interested in change.  Also note that the subscript “d” has been dropped and we just have “r”.
+Logistic population growth
+The equations presented above involve many assumptions.  For example, we only consider survival/death and reproduction, completely ignoring immigration (movement or settling into a population) and emigration (leaving a population).  More subtly, these equations above assume that the population has access to an infinite amount of resources.  That is, no matter how large the population size is, they can always produce more offspring.
+Resources are always limiting.  This means that as populations increase in size, their growth rate, whether expressed as lambda or r_d declines because they run out of food, water, space, or other resources.  Ecologists frequently refer to this as density dependent population growth.  That is, the population growth rate at any given time is not a constant r_d, but rather depends on the current size or density of the population.  (To be more specific, the situation when an increase in density decreases the growth is rate is called negative density dependence.  There are situations when increasing density can increase growth rates, which is known as positive density dependence).
+[I don’t say anything about “logistic” here]
+Logistic populating growth in terms of α
+Density dependent population growth is frequently represented by adding a penalty term to the exponential population growth rate equation  N_{t+1}=N_t+ r_d N_t.  This penalty term sets up the equation so that as population size increases, r_d  begins to decrease.  This penalty term is often called α and results in an equation like this:
+N_{t+1}=N_t+ r_d (1-α*N_t)N_t                                                (11)
+What α represents is the negative impact an organism has on the survival and reproduction of other members of its population.  This negative effect could be caused by things such as increased difficulty finding food, more frequently disease transmission due to crowding, or decreased time spent foraging because more time must be spent defending territories and mates.
+Logistic population growth in terms of carrying capacity K
+An equivalent way of representing logistic population growth is in terms of the carrying capacity, represented with K.  The term (1-α*N_t) in equation 11 gets swapped out with a different for of the penalty term, [1-N_t/K], resulting in this equation
+
+$N_{t+1}=N_t+ r_d*\frac{1-N_t}{K}*N_t$
+
+
+
+[discuss different value of N.t vs K]
+Different versions of the logistic population equation 
+There’s a completely equivalent version of the logistic population growth equation that is frequently used:
+ 
+
+$N_{t+1}=N_t+ r_d*\frac{K-N_t}{K}*N_t$
+
+This is equation is derived from equation 12 using a little bit of algebra.
+First, start with equation 12:
+$N_{t+1}=N_t+ r_d*\frac{1-N_t}{K}*N_t$
+
+Then, since any number divided by itself equals one, we can swap out the 1 in the brackets of equation 12 with the term K/K, like this                 
+N_{t+1}=N_t+ r_d [K/K-N_t/K]N_t
+
+$N_{t+1}=N_t+ r_d*(\frac{K}{K}-\frac{N_t}{K})*N_t$
+
+
+We can then try to remember how to do subtraction with fractions to simplify K/K-N_t/K .  Since both K/K and N/K have K as the denominator, this simplifies to K-N_t/K.  So, we have the new equation
+N_{t+1}=N_t+ r_d [K-N_t/K]N_t                                                             
+
+$N_{t+1}=N_t+ r_d*(\frac{K-N_t}{K})*N_t$
+
+
+As for exponential population growth, we often focus not on calculating population in the future (N_{t+1}) but just how much the population changes ($\Delta N$). We therefore focus on the difference equation
+$\Delta N= r_d [\frac{K-N_t}{K}]N_t $                                                                       
+
+Again, things have been framed here in terms of discrete time.  Many books work in continuous time, so they use this equation:
+$dN/dt= r_d [K-N_t/K]N_t    $     
+
+$\frac{dN}{dt}= r_d [\frac{K-N_t}{K}]N_t    $     
+
+
+

@@ -1,0 +1,180 @@
+# Working outline {-}
+
+## TODO
+
+add to compbio4all package
+
+* frogarms 
+* sparrow telomeres
+* gene size distribution
+
+
+## General book conventions
+
+* "BOOK" = major unit; each BOOK in own folder
+  + Book names are generaly based on important / interesting books related to R, data science, quantitatitve biology, etc.
+* "Part" = major subunit; each Part in own subfolder
+* Chapter = individual lesson/exercise; separate .Rmd files
+
+Many chapters have sections labled **NEW text** followed by one flagged **OLD text**.  The old text is from my previous book project and likely needs to be re-written and aligned with the new format.
+
+## Book names to use / riff off of for BOOK names
+
+* Tufte: "The Visual Display of Quantitative Information", "Beautiful evidence", "Visual Explanations", "Envisioning information"
+
+## Outline
+
+Not necessarily up to date with current structure of books
+
+### BOOK 1: Introduction: Programming with data (Chambers 1998)
+
+General info on R, bioinformatics, comp. bio., the book etc
+
+### BOOK 2: "Biology by the numbers" (Burton)
+
+Actual title of Burton: "Biology by numbers"
+
+* Plotting, data summary
+
+
+#### Part 1: (Time series plots, and lots of bits and pieces)
+
+**Implemented**
+
+* Time series plots - base R
+
+**Not implemented**
+
+* Cumulative number of amino acids discovered 
+* Clines?
+* Eagle data - 
+
+
+#### Part 2: Scatter plots
+
+* -log
+* Log-log
+
+#### Part 3: Drawing lines
+
+* time series
+* (Lambda?)
+* scatter plots
+* summary
+* prediction
+
+
+#### Part 4: smoothers?
+
+#### Part 5: Facetings
+
+
+#### Part 6: Correlations
+
+* Summarizing a scatterplot with a single number
+* Anscombes quarter
+* r
+* R^2?
+
+
+
+#### Part 7: Putting it all together
+scatter plot with line, R, etc
+
+
+#### Part 8: Introduction to high dimensional data
+
+* Big data vs high dimensional data
+* Scatter plot matrices
+* Correlation matrices
+
+#### Part 9: Distributions
+
+* histograms
+* density plot
+* comparing 2 histograms
+* Amino acids
+* Gene length
+* Bones in mammal bodies
+
+#### Part 10: Summarizing distributions numerically
+
+* mean
+* median
+* SD
+* boxplot for 1 group?
+
+#### Part 11: Boxplots
+
+* Sparrow telomeres stuff?
+
+#### Part 12: Inference by eye
+
+* Standard error and confidence interval
+* Sparrow telomeres
+
+#### Part 13: P values
+
+* betatropin case studies
+
+
+### BOOK 3: (Dimension reduction, or boiling down the numbers)
+
+* PCA?
+* Clustering 
+* Euclidean distance (cover this first before genetic dist?)
+
+
+### BOOK 4: Sequences
+
+* Pairwise alignment 
+* pairwise alignmen -> PID etc converts sequences to numbers
+
+### BOOK 5: "Tree thinking"
+
+
+
+## Ideal features of book
+
+Some of this is available for RMarkdown but not yet part of bookdown
+
+**Available - bookdown**
+* special notices 
+  + https://bookdown.org/yihui/bookdown/custom-blocks.html
+
+**Available - rmarkdown**
+* code folding
+* embed webpages -> google sheets, google forms, BLAST, etc
+* horizontal lines ("horizontal rule")
+
+**Not available / unknown**
+* boxed text
+
+
+## Test code
+
+```{r}
+library(Stat2Data)
+data(SeaIce)
+```
+
+
+### This is a default-sized plot
+
+```{r, echo = F}
+plot(Extent ~ Year, data = SeaIce, main = "Default")  # Note, both words capitalized.
+```
+
+
+### fig.height = 5, fig.width = 7
+
+```{r, fig.height = 5, fig.width= 7, echo = F}
+plot(Extent ~ Year, data = SeaIce)  
+```
+
+### fig.height = 4, fig.width = 6
+
+```{r, fig.height = 4, fig.width= 6, echo = F}
+plot(Extent ~ Year, data = SeaIce)  
+```
+

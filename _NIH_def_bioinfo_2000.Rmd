@@ -1,0 +1,38 @@
+## NIH WORKING DEFINITION OF BIOINFORMATICS AND COMPUTATIONAL BIOLOGY
+
+Obtained and re-formatted from:
+http://www.binf.gmu.edu/jafri/math6390-bioinformatics/workingdef.pdf
+
+### July 17, 2000
+
+The following working definition of bioinformatics and computational biology were
+developed by the BISTIC Definition Committee and released on July 17, 2000. The
+committee was chaired by Dr. Michael Huerta of the National Institute of Mental Health and consisted of the following members:
+
+#### Bioinformatics Definition Committee
+
+**BISTIC Members** 
+Michael Huerta (Chair) 
+Florence Haseltine 
+Yuan Liu
+
+**Expert Members**
+Gregory Downing
+Belinda Seto
+
+#### Preamble
+
+Bioinformatics and computational biology are rooted in life sciences as well as computer and information sciences and technologies. Both of these interdisciplinary approaches draw from specific disciplines such as mathematics, physics, computer science and engineering, biology, and behavioral science. Bioinformatics and computational biology each maintain close interactions with life sciences to realize their full potential. Bioinformatics applies principles of information sciences and technologies to make the vast, diverse, and complex life sciences data more understandable and useful. Computational biology uses mathematical and computational approaches to address theoretical and experimental questions in biology. Although bioinformatics and computational biology are distinct, there is also significant overlap and activity at their interface.
+
+
+### Definition
+
+The NIH Biomedical Information Science and Technology Initiative Consortium agreed
+on the following definitions of bioinformatics and computational biology recognizing that no definition could completely eliminate overlap with other activities or preclude variations in interpretation by different individuals and organizations.
+
+*Bioinformatics:* Research, development, or application of computational tools and
+approaches for expanding the use of biological, medical, behavioral or health data, including those to acquire, store, organize, archive, analyze, or visualize such data.
+
+*Computational Biology:* The development and application of data-analytical and
+theoretical methods, mathematical modeling and computational simulation techniques
+to the study of biological, behavioral, and social systems

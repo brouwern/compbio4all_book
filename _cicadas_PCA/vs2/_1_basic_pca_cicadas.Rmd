@@ -1,0 +1,269 @@
+---
+title: 'Basic PCA: Cicadas'
+author: "brouwern@gmail.com"
+date: "March 15, 2017"
+output: html_document
+---
+
+```{r   include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Cicada data
+
+
+* 3 species
+    + tredecassini
+    + tredecim
+    + tredecula
+* 2 genders
+    + male
+    + female
+* 4 measurements
+    + BW = body weight (g)
+    + WL = wing length (mm)
+    + WW = wing width 
+    + BL = body length
+
+
+https://en.wikipedia.org/wiki/Magicicada_tredecassini
+http://magicicada.org/magicicada/m_tredecim/
+
+## Cicada Data provenance
+
+* Data download from http://www.math.uah.edu/stat/data/Cicada.html
+* Originally collected by Ginger Rowell and Robert Grammer, Belmont College.
+* Gender and Species recoded by hand in Excel
+
+
+
+# Load Fake Cicada data
+```{r, eval = F}
+dat2 <- read.csv(file = "cicades_with_FAKE_DATA.csv")
+```
+
+
+# Explore data
+
+## General summary
+```{r}
+summary(dat2)
+dim(dat2)
+head(dat)
+```
+
+
+## Cross tabulation
+
+Make a table of species by gender
+```{r}
+table(dat2$Species, 
+      dat2$G)
+```
+
+
+
+# Visualize univariate data in 2D: Pairs plot
+
+We'll plot each variable against all the other variables in a "scatterplot matrix"
+
+* "lower.panel = NULL" makes it so only the upper triangle is plotted
+    + lower triangle would just be duplicate
+* THe "[,c("BW","WL","WW","BL")]" part makes it so just the numeirc columns are not plot (skipping Gender and Species)
+* alternatively could do "-c(5:6)", which  negative indexing to remove the last two columns
+
+```{r}
+pairs(dat2[,c("BW","WL","WW","BL")], 
+      lower.panel = NULL,
+      col = dat$Species)
+```
+
+
+
+
+## Augmented pairs plots
+
+* There are many ways you can spruce up pairs plots.  
+* You can define custom functions and "pass" them to the pairs() function to add to the plot
+* We'll makes a function to plots the correlation efficient between each variable in the lower panel of the plot
+* See ?pairs for this and further examples
+
+First, make a species function to calcualte the correlation coefficient
+```{r}
+#kinda complex, don't worry about it
+panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
+{
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(0, 1, 0, 1))
+    r <- abs(cor(x, y))
+    txt <- format(c(r, 0.123456789), digits = digits)[1]
+    txt <- paste0(prefix, txt)
+    if(missing(cex.cor)) cex.cor <- 0.8/strwidth(txt)
+    text(0.5, 0.5, txt, cex = cex.cor * r)
+}
+```
+
+2nd, "pass" the function to pairs().  Instead of "lower.panel = NULL"" we now have lower.panel = panel.cor, the function we just made.
+```{r}
+pairs(dat2[,c("BW","WL","WW","BL")], 
+      lower.panel = panel.cor,
+      col = dat2$Species)
+```
+
+
+
+# Visualize data in 3D
+
+* We can plot 3 variables at a time using scatterplot3d()
+* Can colord code them
+    + "as.numeric(dat$Species)" converts the species codes to number so that the color arguement understands what's going on
+
+```{r}
+library(scatterplot3d)
+scatterplot3d(dat2$BW, 
+              dat2$WL,
+              dat2$WW,
+              color = as.numeric(dat2$Species))
+```
+
+
+# Visualize data with a PCA biplot
+
+* PCA = principal components analysis
+* 2 PCA commands in R
+    + princomp
+    + prcomp
+* Similar; one is more versatile, but I foret which one...
+* Output of a PCA can be plot using biplot()
+
+
+## Run the PCA
+
+* note the unusual one-side formula
+    + "~BW+WL+WW+BL"
+```{r}
+my.pca <- princomp(~BW+WL+WW+BL,
+                   data = dat2)
+
+
+```
+
+
+## Plot the PCA output
+
+* Numbered points represent 4D data "projected" onto a 2D surface
+* Each point corresponds to a row of data
+* Colored lines give info on relationship between a measurement (weight, width) and the other measurements 
+* ANGLE between lines correspond to the relative strength of the correlations between 2 measurments
+* LENGTH of line corresponds to variance of that variable
+```{r}
+biplot(my.pca)
+
+```
+
+
+
+```{r}
+cor(dat[,c("BW","WL","WW","BL")])
+var(dat[,c("BW","WL","WW","BL")])
+```
+
+
+
+```{r}
+library(vegan)
+
+dat2$Group <- with(dat2,paste(G,Species))
+my.rad <- rda(dat2[,-c(5:6)])
+biplot(my.rad,
+       display = c("sites", "species"),
+       type = c("text",
+                "points"))
+ordiellipse(my.rad,groups = dat2$Group)
+```
+
+
+
+```{r}
+library(doBy)
+summaryBy(WL ~ Species + G, data = dat2, FUN = mean)
+```
+
+
+
+```{r}
+plot(my.pca$scores[,2]~ my.pca$scores[,1],
+     col = dat2$Species,
+     pch = as.numeric(dat2$G)
+     )
+```
+
+
+
+# Are genders different?
+
+```{r}
+t.test(BL ~ G, data = dat2)
+```
+
+
+# Are species different?
+
+```{r}
+anova(lm(BL~Species, data = dat2))
+
+
+```
+
+
+# Remove rarest species
+```{r}
+i.tredecim <- which(dat$Species == "tredecim")
+
+dat2 <- dat[-i.tredecim, ]
+```
+
+
+
+```{r}
+anova(lm(BL~Species, data = dat2))
+```
+
+
+```{r}
+anova(lm(BL ~ G, data = dat2))
+anova(lm(BW ~ G, data = dat2))
+anova(lm(WL ~ G, data = dat2))
+anova(lm(WW ~ G, data = dat2))
+```
+
+
+
+```{r}
+anova(lm(BL ~ Species, data = dat2))
+anova(lm(BW ~ Species, data = dat2))
+anova(lm(WL ~ Species, data = dat2))
+anova(lm(WW ~ Species, data = dat2))
+```
+
+
+
+
+```{r}
+library(car)
+Anova(lm(BL ~ G + Species, data = dat2))
+Anova(lm(BW ~ G + Species, data = dat2))
+Anova(lm(WL ~ G + Species, data = dat2))
+Anova(lm(WW ~ G + Species, data = dat2))
+```
+
+
+
+```{r}
+anova(lm(BL ~ G*Species, data = dat2))
+anova(lm(BW ~ G*Species, data = dat2))
+anova(lm(WL ~ G*Species, data = dat2))
+anova(lm(WW ~ G*Species, data = dat2))
+```
+
+

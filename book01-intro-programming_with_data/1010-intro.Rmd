@@ -1,0 +1,57 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# (PART) Introduction {-}
+
+### Predface {-}
+
+
+<!-- TODO: update; this is from my original ecological data science book -->
+
+In Book 1 I'll introduce why the role of computers in biology is important and lay out the scope of this book.  I'll also walk through the basic steps of getting R and RStudio up and running on your computer, walk through a basic R session, and discuss the various ways we'll interact with R using **code** and **script files**.  I'll also introduce **rmarkdown**, a way of integrating the R code of scripts with basic capabilities of word processing and web development.  Scripts organized in rmarkdown are a handy way to organize and **annotate code**, store and disseminate your work, and structure your analyses and data presentations so that the computations behind them are fully **reproducible**. 
+
+
+
+# Welcome to computational biology for all! {#intro}
+
+
+Welcome to *Computational Biology for All!*.
+
+This book will introduce you to key concepts of computational biology using the software R.  It covers such topics as statistics, data science, bioinformatics, building phylogenetic trees, and building computer models of biological processes.
+
+I will make only two assumptions in this book: 
+
+1. You are interested in biology and need a computer to answer a question
+1. You've had some college-level biology or are willing to read some basic background information in the book, the appendices or the internet.  
+
+That's it.  If you've forgotten how many amino acids are specified by the genetic code (or never learned; its 20), have never run computer code, or aren't sure what "computational biology" is no worries.  We'll work through everything step by step, review often, and link to additional resources.
+
+
+## R and RStudio - your new best friends!
+
+**R** is one of the major computer languages used by scientists.  "R" refers both to the computer language itself, and to the base software which runs the computer code for us.  Most people write and run their code in a special program that acts like a word processor for coding; these goes by the fancy name **Integrated Development Environments** or **IDEs**.  In this book we'll use the popular IDE software called **RStudio**.
+
+You should get access to the software combination of the software **R** and **RStudio(())** either on the cloud via an account with (**RStudio Cloud**)[https://rstudio.cloud/] or on your own hard drive.  (Some institutions may have their own special implementation of R and RStudio; ask your tech support about this.)  
+
+If your are brand-new to using R the easiest way to get started is using RStudio Cloud.  Getting R and RStudio set up on your own computer isn't (usually) difficult, but RStudio Cloud even easier.  For information on R, RStudio, and RStudio Cloud see the Appendices.  There are also many videos on the internet walking you through these topics.
+
+If I've already lost you a bit with any of this information don't worry - we'll cover more details in the following chapters, and the Appendices cover how to get start with R, RStudio, and RStudio step-by-step.
+
+## How to use this book - be an active learner!
+
+<!-- TODO: implement this. -->
+
+While you can read this as a regular book, it is meant to be an **active learning text**.  That means you'll get much more out of it if you are working through all the code step by step.  There are two ways to do this:
+
+1. Read the book like a book (printed, PDF, website) and type the code in RStudio.
+1. Download the associated **Active Learning Notebooks** and work through them in RStudio.
+
+The **Active Learning Notebooks** contain **ALL** of the text and code, and is the recommended way to experience the book.
+
+
+## Biological scope of this book
+
+"Computational Biology" means different things to different people, and I'll discuss how it can be defined in a later chapter.  In general, though, I'll apply a very broad definition and touch upon all aspects of biology, from biochemistry to ecology.  My starting point will generally by the topics classically associated with computational biology: bioinformatics, genomics, and building phylogenetic trees.  Moreover, when I cover other topics like population dynamics or community ecology I'll often use molecular-biology related examples, such as population growth of transposons in our genomes and community diversity of bacteria in our guts (the so-called gut microbiome, which is studied using molecular sequencing technologies). If you're primary interest is in ecology everything in this book will be applicable at the very least in terms of the techniques, and hopefully it will help everyone expand their idea of how ecological concepts can be applied.

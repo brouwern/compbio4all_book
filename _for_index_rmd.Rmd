@@ -1,0 +1,181 @@
+fro index.Rmd
+
+Title: Computational Biology for All!  Data science, bioinformatics, and other life-sciences awesomeness in R
+
+# Preface {-}
+
+This book grew out of exercises I've written for courses taught at the University of Pittsburgh, California University of Pennsylvania, and Duquesne University.  The goal is to walk students step by step through the process of working with data in R.  
+
+A major influence in how this book is written is th online book [Program MARK: a gentle introduction](http://www.phidot.org/software/mark/docs/book/), edited [Evan Cooch](http://canuck.dnr.cornell.edu/) and [Gary White](https://sites.warnercnr.colostate.edu/gwhite/).  That book patiently walks users through the basic of these models step by step, concept by concept, and click by click.  I have sought to adopt a similar thorough and holistic approach in this book.
+
+
+
+# Plotting two plots
+
+TODO: move to appendices?  Ditch?
+
+```{r}
+data(lynx)
+par(mfrow = c(2,1))
+plot(lynx)
+plot(sunspot.year) 
+```
+
+## Changing range of x values
+
+```{r}
+par(mfrow = c(2,1))
+
+```
+
+
+
+## Tweaking plot layouts
+
+```{r}
+par(mfrow = c(2,1), mar = c(4,4,1,2))
+plot(lynx)
+plot(sunspot.year, xlim = c(1821, 1934))
+```
+
+
+## Adding stuff
+
+Adding vertical lines
+
+"Sunspots and hare numbers are highly correlated for three time periods during the past 250 years: 1751–1787, 1838–1870, and 1948–1986, which were all periods of high-amplitude sunspot fluctuations" (Sinclair and Gosline 1997).
+
+
+```{r}
+par(mfrow = c(1,1), mar = c(4,4,1,2))
+plot(lynx)
+abline(v = 1838, col = 2)
+abline(v = 1870, col = 2)
+```
+
+```{r}
+par(mfrow = c(2,1), mar = c(4,4,1,2))
+plot(lynx)
+abline(v = 1838)
+abline(v = 1870)
+
+plot(sunspot.year, xlim = c(1821, 1934))
+abline(v = 1838)
+abline(v = 1870)
+```
+
+
+## Overlay plots with lines()
+
+```{r}
+par(mfrow = c(1,1), mar = c(4,4,1,2))
+plot(lynx)
+lines(sunspot.year, xlim = c(1821, 1934))
+```
+
+
+
+```{r}
+par(mfrow = c(1,1))
+plot(lynx, log = "y")
+lines(sunspot.year, xlim = c(1821, 1934))
+```
+
+
+```{r}
+par(mfrow = c(1,1))
+plot(lynx, log = "y", ylim = c(1,5500))
+lines(sunspot.year, xlim = c(1821, 1934))
+```
+
+
+```{r}
+par(mfrow = c(1,1))
+plot(lynx, log = "y", ylim = c(1,5500))
+lines(sunspot.year, xlim = c(1821, 1934))
+abline(v = 1838)
+abline(v = 1870)
+```
+
+
+
+
+
+## Rank abundance
+
+```{r, eval = F}
+library(vcd)
+```
+
+```{r, eval = F}
+data(Butterfly)
+```
+
+
+```{r, eval = F}
+plot(Butterfly)
+```
+
+R. A. Fisher, A. S. Corbet, C. B. Williams (1943), The relation between the number of species and the number of individuals, Journal of Animal Ecology, 12, 42–58.
+
+
+## Exercise
+
+```{r}
+library(Stat2Data)
+data(MothEggs)
+plot(Eggs ~ BodyMass, data = MothEggs)
+```
+
+
+
+```{r}
+library(MASS)
+data(Sitka)
+plot(size ~ Time, data = Sitka)
+```
+
+
+
+
+
+
+
+
+
+
+# Basic ggplot2
+
+`ggplot2` has a dataset called "msleep" which has information on the relationship between the typical size of a species and its brain weight, among other things
+
+We load the data actively into R's memory using data(), and can look at the column names using names()
+```{r}
+data(msleep)
+names(msleep)
+```
+
+We can now explore this data set as before using summary(), str(), etc.
+
+Another useful command when you are working with a new dataset is dim().  This tells you the dimension of the dataframe
+
+```{r}
+dim(msleep)
+```
+
+
+### Preview: plotting with ggplot2
+
+ggplot2 is a powerful plotting tool that has become standard among scientists, data scientists, and even journalists.  Here's a quick way to make a plot in ggplot2 using its qplot() function (qplot = quick plot, not to be confused with qqplot).  Note that the qplot() function only works if you have ggplot2 downloaded and installed.
+
+A powerful aspect of ggplot is the fact that it can easily be used to modify plots.  Here, we use the **arguement** "color = " to color code the data points based on their IUCN red list status.
+
+```{r}
+qplot(y = brainwt, x = bodywt, data = msleep, color = conservation)
+```
+
+The animals in this data vary in size from mice to elephants and so a lot of the data points are scrunched together.  A trick to make this easier to see is to take the log of the brainwt and bodywt variable.  In R, we can do this on the fly like this using the log() command
+
+```{r}
+qplot(y = log(brainwt), x = log(bodywt), data = msleep, color = conservation)
+```
+
