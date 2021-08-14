@@ -1,0 +1,15 @@
+# regression data
+
+https://academic.oup.com/hmg/article/5/2/215/2568711?login=true
+https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0164212#sec012
+https://science.sciencemag.org/content/sci/344/6189/1272.full.pdf?casa_token=R4SIGzA249sAAAAA:MWbApw52MYodwfopAdclfxE8KL5asjFydqjjFvUvmrTAVn3y0wYg0PPsFO8Ua09-F3XJmPb2v0xldwQ
+https://royalsocietypublishing.org/doi/full/10.1098/rspb.2014.2898
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3548427/
+https://onlinelibrary.wiley.com/doi/full/10.1002/ijc.10870
+https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0151367#sec020
+https://bmcecolevol.biomedcentral.com/articles/10.1186/1471-2148-7-226#Sec27
+https://www.genetics.org/content/genetics/171/1/145.full.pdf
+https://www.nature.com/articles/s41598-017-15008-1
+
+https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000838#pbio-3000838-g002
+https://www.nature.com/articles/ncomms10486#Sec21

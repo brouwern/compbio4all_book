@@ -58,7 +58,7 @@ In this section the grand mean on ALL the data is calculated; data is NOT broken
 Load data
 
 ```{r}
-library(wildlifeR)
+library(compbio4all)
 data(antlers)
 ```
 

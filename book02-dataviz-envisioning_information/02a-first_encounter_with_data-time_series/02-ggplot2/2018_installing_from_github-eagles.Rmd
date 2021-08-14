@@ -55,17 +55,17 @@ Once everything is downloaded, load the package explicitly with library()
 library(devtools)
 ```
 
-## [ ] Downloading the wildlifeR package with install_github()
+## [ ] Downloading the compbio4all package with install_github()
 
 My github site is at https://github.com/brouwern and the code for wildlifeR is https://github.com/brouwern/wildlifeR.  You can access the files directly if you want, but that isn't necessary.  We can download the package just like it was on CRAN using install_github().  You'll probably see some red text and a LOT of black text as install_github() talks with GitHub.
 
 ```{r echo = TRUE}
-install_github("brouwern/wildlifeR")
+install_github("brouwern/compbio4all")
 ```
 
 Now we can put it all explicitly into memory
 ```{r}
-library(wildlifeR) # [ ] 
+library(compbio4all) # [ ] 
 ```
 
 

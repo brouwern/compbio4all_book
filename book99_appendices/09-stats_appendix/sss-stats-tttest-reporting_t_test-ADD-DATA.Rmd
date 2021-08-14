@@ -29,7 +29,7 @@ The data are availabe in the wildlifeR package and can be loaded using data(wild
 
 ```{r, include=FALSE}
 
-library(wildlifeR)
+library(compbio4all)
 data(brook_trout_ABD)
 
 #calculate survival
