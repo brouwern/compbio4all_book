@@ -24,7 +24,7 @@
 <meta name="author" content="Nathan L. BRouwer" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -240,6 +240,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2" data-path="data-in-dataframes.html"><a href="data-in-dataframes.html#looking-at-dataframes-in-the-console"><i class="fa fa-check"></i><b>8.2</b> Looking at dataframes in the console</a></li>
 <li class="chapter" data-level="8.3" data-path="data-in-dataframes.html"><a href="data-in-dataframes.html#examining-part-of-a-dataframe"><i class="fa fa-check"></i><b>8.3</b> Examining part of a dataframe</a></li>
 <li class="chapter" data-level="8.4" data-path="data-in-dataframes.html"><a href="data-in-dataframes.html#get-information-about-dataframes"><i class="fa fa-check"></i><b>8.4</b> Get information about dataframes</a></li>
+<li class="chapter" data-level="8.5" data-path="data-in-dataframes.html"><a href="data-in-dataframes.html#accessing-rows-and-columns-of-dataframes"><i class="fa fa-check"></i><b>8.5</b> Accessing rows and columns of dataframes</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="plotting-data-in-dataframes.html"><a href="plotting-data-in-dataframes.html"><i class="fa fa-check"></i><b>9</b> Plotting data in dataframes</a>
 <ul>
@@ -278,144 +279,144 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="plotting-data-in-dataframes" class="section level1" number="9">
 <h1><span class="header-section-number">Chapter 9</span> Plotting data in dataframes</h1>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="plotting-data-in-dataframes.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Stat2Data)</span>
-<span id="cb39-2"><a href="plotting-data-in-dataframes.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(SeaIce)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="plotting-data-in-dataframes.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Stat2Data)</span>
+<span id="cb45-2"><a href="plotting-data-in-dataframes.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(SeaIce)</span></code></pre></div>
 <p>Most data in R are organized into dataframes. Similar to when we plot data in a spreadsheet, to plot data from a dataframe we need to tell R exactly what we want on the <strong>x-axis (horizontal)</strong> and <strong>y-axis (vertical)</strong>.</p>
 <p>⚠️ <strong>Note:</strong> For reasons we don’t have to get in to, the <code>lynx</code> data were a special case where we didn’t have to define x and y⚠️</p>
 <p>We can plot the Extent of artic sea ice again using the <code>plot()</code> command, and using a cool convention in R called <strong>formula notation</strong>. Formula notation uses the (<strong>tilde</strong>)[<a href="https://en.wikipedia.org/wiki/Tilde" class="uri">https://en.wikipedia.org/wiki/Tilde</a>] symbol <code>~</code>. In math, <code>~</code> can have several meanings. In R, it means “relates to” , “versus”, “depends on.” So we can plot the relation between <code>Year</code> and seac <code>Extent</code> as a <strong>y versus x</strong> relation as <code>Extent ~ Year</code>. We also have to include the argument <code>data = SeaIce</code> so R knows where to get <code>Extent</code> and <code>Year</code>.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="plotting-data-in-dataframes.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year, <span class="at">data =</span> SeaIce)  <span class="co"># Note, both words capitalized.</span></span></code></pre></div>
-<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="plotting-data-in-dataframes.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year, <span class="at">data =</span> SeaIce)  <span class="co"># Note, both words capitalized.</span></span></code></pre></div>
+<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <div id="base-r-graphics" class="section level2" number="9.1">
 <h2><span class="header-section-number">9.1</span> Base-R graphics</h2>
 <p>When we use the <code>plot</code> command were using <strong>Base R</strong> graphics. As noted before there are several ways to make plots in R and you should be able to spot which one is which when looking at code. We’ll cover some of the key features of Bare R graphics now. While different plotting methods have different commands and arguments, they all share a common feature: everything in a plot can be customized, and each element is customized with a command or arguement.</p>
 <div id="type-of-points" class="section level3" number="9.1.1">
 <h3><span class="header-section-number">9.1.1</span> Type of points</h3>
 <p><code>plot()</code> can draw dots or lines We make it use lines using the <code>type = "l"</code> argument (note that the l is in quotes)</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="plotting-data-in-dataframes.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">data =</span> SeaIce)  <span class="co"># Note: l in quotes</span></span></code></pre></div>
-<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="plotting-data-in-dataframes.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">data =</span> SeaIce)  <span class="co"># Note: l in quotes</span></span></code></pre></div>
+<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 <p>As noted before, R doesn’t mind if you split things on lines. To keep track of the things I”m doing to the plot I’ll format things like this</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="plotting-data-in-dataframes.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
-<span id="cb42-2"><a href="plotting-data-in-dataframes.html#cb42-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;l&quot;</span>,     <span class="co"># type of plot; Note: l in quotes</span></span>
-<span id="cb42-3"><a href="plotting-data-in-dataframes.html#cb42-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="plotting-data-in-dataframes.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
+<span id="cb48-2"><a href="plotting-data-in-dataframes.html#cb48-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;l&quot;</span>,     <span class="co"># type of plot; Note: l in quotes</span></span>
+<span id="cb48-3"><a href="plotting-data-in-dataframes.html#cb48-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span></code></pre></div>
 <p>As we did with the <code>lynx</code> data we can combine points and lines with <code>type = "b"</code>. (Do you recall what “b” stands for?)</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="plotting-data-in-dataframes.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
-<span id="cb43-2"><a href="plotting-data-in-dataframes.html#cb43-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     <span class="co"># type of plot; Note: b in quotes</span></span>
-<span id="cb43-3"><a href="plotting-data-in-dataframes.html#cb43-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="plotting-data-in-dataframes.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
+<span id="cb49-2"><a href="plotting-data-in-dataframes.html#cb49-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     <span class="co"># type of plot; Note: b in quotes</span></span>
+<span id="cb49-3"><a href="plotting-data-in-dataframes.html#cb49-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span></code></pre></div>
 <p>We can adjust color with <code>col = ...</code>. Recall the this is just a number, not in quotes.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="plotting-data-in-dataframes.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
-<span id="cb44-2"><a href="plotting-data-in-dataframes.html#cb44-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     <span class="co"># type of plot; Note: b in quotes</span></span>
-<span id="cb44-3"><a href="plotting-data-in-dataframes.html#cb44-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="dv">2</span>,        <span class="co"># color; no quotes</span></span>
-<span id="cb44-4"><a href="plotting-data-in-dataframes.html#cb44-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="plotting-data-in-dataframes.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
+<span id="cb50-2"><a href="plotting-data-in-dataframes.html#cb50-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     <span class="co"># type of plot; Note: b in quotes</span></span>
+<span id="cb50-3"><a href="plotting-data-in-dataframes.html#cb50-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="dv">2</span>,        <span class="co"># color; no quotes</span></span>
+<span id="cb50-4"><a href="plotting-data-in-dataframes.html#cb50-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span></code></pre></div>
 <p>We can add a main title to with <code>main = ...</code></p>
 <!-- Good quiz question: what has to be quote, what doesn't; fix this code but un-qutoing things that should be quoted. -->
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="plotting-data-in-dataframes.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
-<span id="cb45-2"><a href="plotting-data-in-dataframes.html#cb45-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     <span class="co"># type of plot; Note: b in quotes</span></span>
-<span id="cb45-3"><a href="plotting-data-in-dataframes.html#cb45-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="dv">2</span>,        <span class="co"># color; no quotes</span></span>
-<span id="cb45-4"><a href="plotting-data-in-dataframes.html#cb45-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Arctic Sea Ice Extent&quot;</span>, <span class="co"># main title, in quotes</span></span>
-<span id="cb45-5"><a href="plotting-data-in-dataframes.html#cb45-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span></code></pre></div>
-<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
-<p>Its always good to include your units. <code>Extent</code> and <code>Area</code> are in square kilometers. We can say specifically what we want for the y-axis label using <code>ylab = ...</code></p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="plotting-data-in-dataframes.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
-<span id="cb46-2"><a href="plotting-data-in-dataframes.html#cb46-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     <span class="co"># type of plot; Note: b in quotes</span></span>
-<span id="cb46-3"><a href="plotting-data-in-dataframes.html#cb46-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="dv">2</span>,        <span class="co"># color; no quotes</span></span>
-<span id="cb46-4"><a href="plotting-data-in-dataframes.html#cb46-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Arctic Sea Ice Extent&quot;</span>, <span class="co"># main title, in quotes</span></span>
-<span id="cb46-5"><a href="plotting-data-in-dataframes.html#cb46-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Extent (square kilometers)&quot;</span>,</span>
-<span id="cb46-6"><a href="plotting-data-in-dataframes.html#cb46-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span></code></pre></div>
-<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
-<p>We can change the appearance of the line using <code>lty = ...</code>, which stands for “line type”:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="plotting-data-in-dataframes.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
-<span id="cb47-2"><a href="plotting-data-in-dataframes.html#cb47-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     <span class="co"># type of plot; Note: b in quotes</span></span>
-<span id="cb47-3"><a href="plotting-data-in-dataframes.html#cb47-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="dv">2</span>,        <span class="co"># color; no quotes</span></span>
-<span id="cb47-4"><a href="plotting-data-in-dataframes.html#cb47-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Arctic Sea Ice Extent&quot;</span>, <span class="co"># main title, in quotes</span></span>
-<span id="cb47-5"><a href="plotting-data-in-dataframes.html#cb47-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Extent (square kilometers)&quot;</span>,</span>
-<span id="cb47-6"><a href="plotting-data-in-dataframes.html#cb47-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">lty =</span> <span class="dv">2</span>,        <span class="co"># line type; not quoted</span></span>
-<span id="cb47-7"><a href="plotting-data-in-dataframes.html#cb47-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="plotting-data-in-dataframes.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
+<span id="cb51-2"><a href="plotting-data-in-dataframes.html#cb51-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     <span class="co"># type of plot; Note: b in quotes</span></span>
+<span id="cb51-3"><a href="plotting-data-in-dataframes.html#cb51-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="dv">2</span>,        <span class="co"># color; no quotes</span></span>
+<span id="cb51-4"><a href="plotting-data-in-dataframes.html#cb51-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Arctic Sea Ice Extent&quot;</span>, <span class="co"># main title, in quotes</span></span>
+<span id="cb51-5"><a href="plotting-data-in-dataframes.html#cb51-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span></code></pre></div>
 <p><img src="compbio4all-book_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
-<p>I’m not a fan of the open circles for plotting points; we can change those too using the argument <code>pch =</code>.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="plotting-data-in-dataframes.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
-<span id="cb48-2"><a href="plotting-data-in-dataframes.html#cb48-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     <span class="co"># type of plot; Note: b in quotes</span></span>
-<span id="cb48-3"><a href="plotting-data-in-dataframes.html#cb48-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="dv">2</span>,        <span class="co"># color; no quotes</span></span>
-<span id="cb48-4"><a href="plotting-data-in-dataframes.html#cb48-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Arctic Sea Ice Extent&quot;</span>, <span class="co"># main title, in quotes</span></span>
-<span id="cb48-5"><a href="plotting-data-in-dataframes.html#cb48-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Extent (square kilometers)&quot;</span>,</span>
-<span id="cb48-6"><a href="plotting-data-in-dataframes.html#cb48-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">lty =</span> <span class="dv">2</span>,        <span class="co"># line type; not quoted</span></span>
-<span id="cb48-7"><a href="plotting-data-in-dataframes.html#cb48-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>,       <span class="co"># point type; not quoted</span></span>
-<span id="cb48-8"><a href="plotting-data-in-dataframes.html#cb48-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span></code></pre></div>
+<p>Its always good to include your units. <code>Extent</code> and <code>Area</code> are in square kilometers. We can say specifically what we want for the y-axis label using <code>ylab = ...</code></p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="plotting-data-in-dataframes.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
+<span id="cb52-2"><a href="plotting-data-in-dataframes.html#cb52-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     <span class="co"># type of plot; Note: b in quotes</span></span>
+<span id="cb52-3"><a href="plotting-data-in-dataframes.html#cb52-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="dv">2</span>,        <span class="co"># color; no quotes</span></span>
+<span id="cb52-4"><a href="plotting-data-in-dataframes.html#cb52-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Arctic Sea Ice Extent&quot;</span>, <span class="co"># main title, in quotes</span></span>
+<span id="cb52-5"><a href="plotting-data-in-dataframes.html#cb52-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Extent (square kilometers)&quot;</span>,</span>
+<span id="cb52-6"><a href="plotting-data-in-dataframes.html#cb52-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span></code></pre></div>
 <p><img src="compbio4all-book_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<p>We can change the appearance of the line using <code>lty = ...</code>, which stands for “line type”:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="plotting-data-in-dataframes.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
+<span id="cb53-2"><a href="plotting-data-in-dataframes.html#cb53-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     <span class="co"># type of plot; Note: b in quotes</span></span>
+<span id="cb53-3"><a href="plotting-data-in-dataframes.html#cb53-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="dv">2</span>,        <span class="co"># color; no quotes</span></span>
+<span id="cb53-4"><a href="plotting-data-in-dataframes.html#cb53-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Arctic Sea Ice Extent&quot;</span>, <span class="co"># main title, in quotes</span></span>
+<span id="cb53-5"><a href="plotting-data-in-dataframes.html#cb53-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Extent (square kilometers)&quot;</span>,</span>
+<span id="cb53-6"><a href="plotting-data-in-dataframes.html#cb53-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">lty =</span> <span class="dv">2</span>,        <span class="co"># line type; not quoted</span></span>
+<span id="cb53-7"><a href="plotting-data-in-dataframes.html#cb53-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span></code></pre></div>
+<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<p>I’m not a fan of the open circles for plotting points; we can change those too using the argument <code>pch =</code>.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="plotting-data-in-dataframes.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
+<span id="cb54-2"><a href="plotting-data-in-dataframes.html#cb54-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     <span class="co"># type of plot; Note: b in quotes</span></span>
+<span id="cb54-3"><a href="plotting-data-in-dataframes.html#cb54-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="dv">2</span>,        <span class="co"># color; no quotes</span></span>
+<span id="cb54-4"><a href="plotting-data-in-dataframes.html#cb54-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Arctic Sea Ice Extent&quot;</span>, <span class="co"># main title, in quotes</span></span>
+<span id="cb54-5"><a href="plotting-data-in-dataframes.html#cb54-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Extent (square kilometers)&quot;</span>,</span>
+<span id="cb54-6"><a href="plotting-data-in-dataframes.html#cb54-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">lty =</span> <span class="dv">2</span>,        <span class="co"># line type; not quoted</span></span>
+<span id="cb54-7"><a href="plotting-data-in-dataframes.html#cb54-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>,       <span class="co"># point type; not quoted</span></span>
+<span id="cb54-8"><a href="plotting-data-in-dataframes.html#cb54-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span></code></pre></div>
+<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
 </div>
 <div id="plotting-two-columns-of-data" class="section level3" number="9.1.2">
 <h3><span class="header-section-number">9.1.2</span> Plotting two columns of data</h3>
 <p>Often we want to represent two distinct things on our graph. In spreadsheets these are called separate <strong>series</strong> of data. When making a <strong>time series plot</strong> like this one we can add a new column of data using a species command called <code>points()</code> which works very similar to <code>plot()</code>.</p>
 <p>⚠️ <strong>Note:</strong> The <code>points()</code> command only works if its it precede by a statement from the <code>plot()</code> command ⚠️</p>
 <!-- Simple assignment: fix bad code with points() preceding plot() -->
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="plotting-data-in-dataframes.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Main plot: Extent</span></span>
-<span id="cb49-2"><a href="plotting-data-in-dataframes.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
-<span id="cb49-3"><a href="plotting-data-in-dataframes.html#cb49-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     <span class="co"># type of plot; Note: b in quotes</span></span>
-<span id="cb49-4"><a href="plotting-data-in-dataframes.html#cb49-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="dv">2</span>,        <span class="co"># color; no quotes</span></span>
-<span id="cb49-5"><a href="plotting-data-in-dataframes.html#cb49-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Arctic Sea Ice Extent&quot;</span>, <span class="co"># main title, in quotes</span></span>
-<span id="cb49-6"><a href="plotting-data-in-dataframes.html#cb49-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Extent (square kilometers)&quot;</span>,</span>
-<span id="cb49-7"><a href="plotting-data-in-dataframes.html#cb49-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">lty =</span> <span class="dv">2</span>,        <span class="co"># line type; not quoted</span></span>
-<span id="cb49-8"><a href="plotting-data-in-dataframes.html#cb49-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>,       <span class="co"># point type; not quoted</span></span>
-<span id="cb49-9"><a href="plotting-data-in-dataframes.html#cb49-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span>
-<span id="cb49-10"><a href="plotting-data-in-dataframes.html#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-11"><a href="plotting-data-in-dataframes.html#cb49-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Second column of data: Area</span></span>
-<span id="cb49-12"><a href="plotting-data-in-dataframes.html#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(Area <span class="sc">~</span> Year, <span class="at">data =</span> SeaIce)</span></code></pre></div>
-<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="plotting-data-in-dataframes.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Main plot: Extent</span></span>
+<span id="cb55-2"><a href="plotting-data-in-dataframes.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
+<span id="cb55-3"><a href="plotting-data-in-dataframes.html#cb55-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     <span class="co"># type of plot; Note: b in quotes</span></span>
+<span id="cb55-4"><a href="plotting-data-in-dataframes.html#cb55-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="dv">2</span>,        <span class="co"># color; no quotes</span></span>
+<span id="cb55-5"><a href="plotting-data-in-dataframes.html#cb55-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Arctic Sea Ice Extent&quot;</span>, <span class="co"># main title, in quotes</span></span>
+<span id="cb55-6"><a href="plotting-data-in-dataframes.html#cb55-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Extent (square kilometers)&quot;</span>,</span>
+<span id="cb55-7"><a href="plotting-data-in-dataframes.html#cb55-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">lty =</span> <span class="dv">2</span>,        <span class="co"># line type; not quoted</span></span>
+<span id="cb55-8"><a href="plotting-data-in-dataframes.html#cb55-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>,       <span class="co"># point type; not quoted</span></span>
+<span id="cb55-9"><a href="plotting-data-in-dataframes.html#cb55-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span>
+<span id="cb55-10"><a href="plotting-data-in-dataframes.html#cb55-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-11"><a href="plotting-data-in-dataframes.html#cb55-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Second column of data: Area</span></span>
+<span id="cb55-12"><a href="plotting-data-in-dataframes.html#cb55-12" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(Area <span class="sc">~</span> Year, <span class="at">data =</span> SeaIce)</span></code></pre></div>
+<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
 <p>I can now customize the sea ice <code>Area</code> part of the plot by add <strong>arguments</strong> to the <code>points()</code> statement.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="plotting-data-in-dataframes.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Main plot: Extent</span></span>
-<span id="cb50-2"><a href="plotting-data-in-dataframes.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
-<span id="cb50-3"><a href="plotting-data-in-dataframes.html#cb50-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     <span class="co"># type of plot; Note: b in quotes</span></span>
-<span id="cb50-4"><a href="plotting-data-in-dataframes.html#cb50-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="dv">2</span>,        <span class="co"># color; no quotes</span></span>
-<span id="cb50-5"><a href="plotting-data-in-dataframes.html#cb50-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Arctic Sea Ice Extent&quot;</span>, <span class="co"># main title, in quotes</span></span>
-<span id="cb50-6"><a href="plotting-data-in-dataframes.html#cb50-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Extent (square kilometers)&quot;</span>,</span>
-<span id="cb50-7"><a href="plotting-data-in-dataframes.html#cb50-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">lty =</span> <span class="dv">2</span>,        <span class="co"># line type; not quoted</span></span>
-<span id="cb50-8"><a href="plotting-data-in-dataframes.html#cb50-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>,       <span class="co"># point type; not quoted</span></span>
-<span id="cb50-9"><a href="plotting-data-in-dataframes.html#cb50-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span>
-<span id="cb50-10"><a href="plotting-data-in-dataframes.html#cb50-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-11"><a href="plotting-data-in-dataframes.html#cb50-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Second column of data: Area</span></span>
-<span id="cb50-12"><a href="plotting-data-in-dataframes.html#cb50-12" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(Area <span class="sc">~</span> Year,</span>
-<span id="cb50-13"><a href="plotting-data-in-dataframes.html#cb50-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,</span>
-<span id="cb50-14"><a href="plotting-data-in-dataframes.html#cb50-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="dv">3</span>,</span>
-<span id="cb50-15"><a href="plotting-data-in-dataframes.html#cb50-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">17</span>,</span>
-<span id="cb50-16"><a href="plotting-data-in-dataframes.html#cb50-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> SeaIce)</span></code></pre></div>
-<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="plotting-data-in-dataframes.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Main plot: Extent</span></span>
+<span id="cb56-2"><a href="plotting-data-in-dataframes.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
+<span id="cb56-3"><a href="plotting-data-in-dataframes.html#cb56-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     <span class="co"># type of plot; Note: b in quotes</span></span>
+<span id="cb56-4"><a href="plotting-data-in-dataframes.html#cb56-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="dv">2</span>,        <span class="co"># color; no quotes</span></span>
+<span id="cb56-5"><a href="plotting-data-in-dataframes.html#cb56-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Arctic Sea Ice Extent&quot;</span>, <span class="co"># main title, in quotes</span></span>
+<span id="cb56-6"><a href="plotting-data-in-dataframes.html#cb56-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Extent (square kilometers)&quot;</span>,</span>
+<span id="cb56-7"><a href="plotting-data-in-dataframes.html#cb56-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">lty =</span> <span class="dv">2</span>,        <span class="co"># line type; not quoted</span></span>
+<span id="cb56-8"><a href="plotting-data-in-dataframes.html#cb56-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>,       <span class="co"># point type; not quoted</span></span>
+<span id="cb56-9"><a href="plotting-data-in-dataframes.html#cb56-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span>
+<span id="cb56-10"><a href="plotting-data-in-dataframes.html#cb56-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-11"><a href="plotting-data-in-dataframes.html#cb56-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Second column of data: Area</span></span>
+<span id="cb56-12"><a href="plotting-data-in-dataframes.html#cb56-12" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(Area <span class="sc">~</span> Year,</span>
+<span id="cb56-13"><a href="plotting-data-in-dataframes.html#cb56-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,</span>
+<span id="cb56-14"><a href="plotting-data-in-dataframes.html#cb56-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="dv">3</span>,</span>
+<span id="cb56-15"><a href="plotting-data-in-dataframes.html#cb56-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">17</span>,</span>
+<span id="cb56-16"><a href="plotting-data-in-dataframes.html#cb56-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> SeaIce)</span></code></pre></div>
+<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
 <p>❓ There’s a problem with my graph though - can you spot it? It only really becomes apparent when you connect the dots with a line. ❓</p>
 </div>
 <div id="changing-the-range-of-a-plot-axis" class="section level3" number="9.1.3">
 <h3><span class="header-section-number">9.1.3</span> Changing the range of a plot axis</h3>
 <p>Let’s go back to our original plot and forget about all the fancy arguments and adding <code>points()</code> for a little bit. The problem with the last graph we made is that some points are not showing - if you look in the lower right-hand part points around 2006-2008 and 2011-2013 are not showing up because the y-axis stops around 3.5. We can fix this by adding a new argument which sets the limits of the y-axis: <code>ylim = ...</code>. To do this correctly, we have to introduce a new function: <code>c()</code>. This is actually one of the most common functions in R. In the <code>c()</code> we need to tell R the lower and upper limits we want for the y-axis. Let’s do 0 and 8, which will be coded as <code>c(0,8)</code>.</p>
 <p>So, to set the y-axis limits we do this:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="plotting-data-in-dataframes.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  </span>
-<span id="cb51-2"><a href="plotting-data-in-dataframes.html#cb51-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">8</span>), <span class="co"># the c(...) fucntion to set limits</span></span>
-<span id="cb51-3"><a href="plotting-data-in-dataframes.html#cb51-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce) </span></code></pre></div>
-<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="plotting-data-in-dataframes.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  </span>
+<span id="cb57-2"><a href="plotting-data-in-dataframes.html#cb57-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">8</span>), <span class="co"># the c(...) fucntion to set limits</span></span>
+<span id="cb57-3"><a href="plotting-data-in-dataframes.html#cb57-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce) </span></code></pre></div>
+<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
 <p>Now we have a bunch more space at the bottom. We can add our <code>points()</code> back to see if this work:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="plotting-data-in-dataframes.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  </span>
-<span id="cb52-2"><a href="plotting-data-in-dataframes.html#cb52-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">8</span>), <span class="co"># the c(...) fucntion to set limits</span></span>
-<span id="cb52-3"><a href="plotting-data-in-dataframes.html#cb52-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce) </span>
-<span id="cb52-4"><a href="plotting-data-in-dataframes.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(Area <span class="sc">~</span> Year,</span>
-<span id="cb52-5"><a href="plotting-data-in-dataframes.html#cb52-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> SeaIce,</span>
-<span id="cb52-6"><a href="plotting-data-in-dataframes.html#cb52-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="plotting-data-in-dataframes.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  </span>
+<span id="cb58-2"><a href="plotting-data-in-dataframes.html#cb58-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">8</span>), <span class="co"># the c(...) fucntion to set limits</span></span>
+<span id="cb58-3"><a href="plotting-data-in-dataframes.html#cb58-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce) </span>
+<span id="cb58-4"><a href="plotting-data-in-dataframes.html#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(Area <span class="sc">~</span> Year,</span>
+<span id="cb58-5"><a href="plotting-data-in-dataframes.html#cb58-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> SeaIce,</span>
+<span id="cb58-6"><a href="plotting-data-in-dataframes.html#cb58-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
 <p>⚠️ <strong>Note:</strong> <code>ylim = ...</code> only goes in <code>plot()</code>, not <code>points()</code>. <code>View()</code> ⚠️</p>
 <p>Let’s re-make our fancy plots now with <code>ylim = ...</code> set.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="plotting-data-in-dataframes.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Main plot: Extent</span></span>
-<span id="cb53-2"><a href="plotting-data-in-dataframes.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  </span>
-<span id="cb53-3"><a href="plotting-data-in-dataframes.html#cb53-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     </span>
-<span id="cb53-4"><a href="plotting-data-in-dataframes.html#cb53-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="dv">2</span>,       </span>
-<span id="cb53-5"><a href="plotting-data-in-dataframes.html#cb53-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Arctic Sea Ice Extent&quot;</span>, </span>
-<span id="cb53-6"><a href="plotting-data-in-dataframes.html#cb53-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Extent (square kilometers)&quot;</span>,</span>
-<span id="cb53-7"><a href="plotting-data-in-dataframes.html#cb53-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">lty =</span> <span class="dv">2</span>,        </span>
-<span id="cb53-8"><a href="plotting-data-in-dataframes.html#cb53-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>,       </span>
-<span id="cb53-9"><a href="plotting-data-in-dataframes.html#cb53-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">8</span>), <span class="co"># &lt;#&lt;== y-axis limits</span></span>
-<span id="cb53-10"><a href="plotting-data-in-dataframes.html#cb53-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  </span>
-<span id="cb53-11"><a href="plotting-data-in-dataframes.html#cb53-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-12"><a href="plotting-data-in-dataframes.html#cb53-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Second column of data: Area</span></span>
-<span id="cb53-13"><a href="plotting-data-in-dataframes.html#cb53-13" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(Area <span class="sc">~</span> Year,</span>
-<span id="cb53-14"><a href="plotting-data-in-dataframes.html#cb53-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,</span>
-<span id="cb53-15"><a href="plotting-data-in-dataframes.html#cb53-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="dv">3</span>,</span>
-<span id="cb53-16"><a href="plotting-data-in-dataframes.html#cb53-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">17</span>,</span>
-<span id="cb53-17"><a href="plotting-data-in-dataframes.html#cb53-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> SeaIce)</span></code></pre></div>
-<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="plotting-data-in-dataframes.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Main plot: Extent</span></span>
+<span id="cb59-2"><a href="plotting-data-in-dataframes.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  </span>
+<span id="cb59-3"><a href="plotting-data-in-dataframes.html#cb59-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,     </span>
+<span id="cb59-4"><a href="plotting-data-in-dataframes.html#cb59-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="dv">2</span>,       </span>
+<span id="cb59-5"><a href="plotting-data-in-dataframes.html#cb59-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Arctic Sea Ice Extent&quot;</span>, </span>
+<span id="cb59-6"><a href="plotting-data-in-dataframes.html#cb59-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Extent (square kilometers)&quot;</span>,</span>
+<span id="cb59-7"><a href="plotting-data-in-dataframes.html#cb59-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">lty =</span> <span class="dv">2</span>,        </span>
+<span id="cb59-8"><a href="plotting-data-in-dataframes.html#cb59-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>,       </span>
+<span id="cb59-9"><a href="plotting-data-in-dataframes.html#cb59-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">8</span>), <span class="co"># &lt;#&lt;== y-axis limits</span></span>
+<span id="cb59-10"><a href="plotting-data-in-dataframes.html#cb59-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  </span>
+<span id="cb59-11"><a href="plotting-data-in-dataframes.html#cb59-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-12"><a href="plotting-data-in-dataframes.html#cb59-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Second column of data: Area</span></span>
+<span id="cb59-13"><a href="plotting-data-in-dataframes.html#cb59-13" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(Area <span class="sc">~</span> Year,</span>
+<span id="cb59-14"><a href="plotting-data-in-dataframes.html#cb59-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,</span>
+<span id="cb59-15"><a href="plotting-data-in-dataframes.html#cb59-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="dv">3</span>,</span>
+<span id="cb59-16"><a href="plotting-data-in-dataframes.html#cb59-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">17</span>,</span>
+<span id="cb59-17"><a href="plotting-data-in-dataframes.html#cb59-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> SeaIce)</span></code></pre></div>
+<p><img src="compbio4all-book_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 </div>
 </div>
 <div id="you-try-it" class="section level2" number="9.2">
@@ -423,24 +424,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="fixer-uppers" class="section level3" number="9.2.1">
 <h3><span class="header-section-number">9.2.1</span> Fixer-uppers</h3>
 <p>Fix the code below so it works</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="plotting-data-in-dataframes.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent , Year,  </span>
-<span id="cb54-2"><a href="plotting-data-in-dataframes.html#cb54-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  </span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="plotting-data-in-dataframes.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent , Year,  </span>
+<span id="cb60-2"><a href="plotting-data-in-dataframes.html#cb60-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  </span></code></pre></div>
 <p>Fix the code below so it works</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="plotting-data-in-dataframes.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
-<span id="cb55-2"><a href="plotting-data-in-dataframes.html#cb55-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> b,     <span class="co"># type of plot; Note: b in quotes</span></span>
-<span id="cb55-3"><a href="plotting-data-in-dataframes.html#cb55-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;2&quot;</span>,        <span class="co"># color; no quotes</span></span>
-<span id="cb55-4"><a href="plotting-data-in-dataframes.html#cb55-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="plotting-data-in-dataframes.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Extent <span class="sc">~</span> Year,  <span class="co"># relationship</span></span>
+<span id="cb61-2"><a href="plotting-data-in-dataframes.html#cb61-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> b,     <span class="co"># type of plot; Note: b in quotes</span></span>
+<span id="cb61-3"><a href="plotting-data-in-dataframes.html#cb61-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;2&quot;</span>,        <span class="co"># color; no quotes</span></span>
+<span id="cb61-4"><a href="plotting-data-in-dataframes.html#cb61-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> SeaIce)  <span class="co"># data</span></span></code></pre></div>
 </div>
 <div id="intermediate" class="section level3" number="9.2.2">
 <h3><span class="header-section-number">9.2.2</span> Intermediate</h3>
 <p>Make a plot with <code>Area</code> on the x-axis and <code>Extent</code> on the y-axis.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="plotting-data-in-dataframes.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Write the code below</span></span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="plotting-data-in-dataframes.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Write the code below</span></span></code></pre></div>
 <!-- Could add stuff with lynx data if I set it up as a dataframe -->
 </div>
 <div id="advanced" class="section level3" number="9.2.3">
 <h3><span class="header-section-number">9.2.3</span> Advanced</h3>
 <p>Based on the code above, make a plot of the SeaIce data where <code>Area</code> appears within the <code>plot()</code> statement, and <code>Extent</code> is in <code>points()</code>.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="plotting-data-in-dataframes.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the code below: </span></span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="plotting-data-in-dataframes.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the code below: </span></span></code></pre></div>
 
 </div>
 </div>

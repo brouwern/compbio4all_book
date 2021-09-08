@@ -68,6 +68,7 @@ looking-at-dataframes-with-view
 looking-at-dataframes-in-the-console
 examining-part-of-a-dataframe
 get-information-about-dataframes
+accessing-rows-and-columns-of-dataframes
 plotting-data-in-dataframes
 base-r-graphics
 type-of-points

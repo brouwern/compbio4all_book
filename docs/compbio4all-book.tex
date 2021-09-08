@@ -117,7 +117,7 @@
 
 \title{Computational Biology for All!}
 \author{Nathan L. BRouwer}
-\date{2021-09-07}
+\date{2021-09-08}
 
 \begin{document}
 \maketitle
@@ -1375,6 +1375,48 @@ The following commands give you important information about a dataframe.
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{accessing-rows-and-columns-of-dataframes}{%
+\section{Accessing rows and columns of dataframes}\label{accessing-rows-and-columns-of-dataframes}}
+
+First row
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SeaIce[}\DecValTok{1}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Year Extent Area t
+## 1 1979   7.22 4.54 1
+\end{verbatim}
+
+First column
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SeaIce[ , }\DecValTok{1}\NormalTok{] }\CommentTok{\# with brackets}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1979 1980 1981 1982 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993
+## [16] 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008
+## [31] 2009 2010 2011 2012 2013 2014 2015
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SeaIce}\SpecialCharTok{$}\NormalTok{Year  }\CommentTok{\# with $}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1979 1980 1981 1982 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993
+## [16] 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008
+## [31] 2009 2010 2011 2012 2013 2014 2015
+\end{verbatim}
+
 \hypertarget{plotting-data-in-dataframes}{%
 \chapter{Plotting data in dataframes}\label{plotting-data-in-dataframes}}
 
@@ -1397,7 +1439,7 @@ We can plot the Extent of artic sea ice again using the \texttt{plot()} command,
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-50-1.pdf}
+\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-52-1.pdf}
 
 \hypertarget{base-r-graphics}{%
 \section{Base-R graphics}\label{base-r-graphics}}
@@ -1415,7 +1457,7 @@ When we use the \texttt{plot} command were using \textbf{Base R} graphics. As no
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-51-1.pdf}
+\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-53-1.pdf}
 
 As noted before, R doesn't mind if you split things on lines. To keep track of the things I''m doing to the plot I'll format things like this
 
@@ -1460,7 +1502,7 @@ We can add a main title to with \texttt{main\ =\ ...}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-55-1.pdf}
+\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-57-1.pdf}
 
 Its always good to include your units. \texttt{Extent} and \texttt{Area} are in square kilometers. We can say specifically what we want for the y-axis label using \texttt{ylab\ =\ ...}
 
@@ -1475,7 +1517,7 @@ Its always good to include your units. \texttt{Extent} and \texttt{Area} are in 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-56-1.pdf}
+\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-58-1.pdf}
 
 We can change the appearance of the line using \texttt{lty\ =\ ...}, which stands for ``line type'':
 
@@ -1491,7 +1533,7 @@ We can change the appearance of the line using \texttt{lty\ =\ ...}, which stand
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-57-1.pdf}
+\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-59-1.pdf}
 
 I'm not a fan of the open circles for plotting points; we can change those too using the argument \texttt{pch\ =}.
 
@@ -1508,7 +1550,7 @@ I'm not a fan of the open circles for plotting points; we can change those too u
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-58-1.pdf}
+\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-60-1.pdf}
 
 \hypertarget{plotting-two-columns-of-data}{%
 \subsection{Plotting two columns of data}\label{plotting-two-columns-of-data}}
@@ -1534,7 +1576,7 @@ Often we want to represent two distinct things on our graph. In spreadsheets the
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-59-1.pdf}
+\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-61-1.pdf}
 
 I can now customize the sea ice \texttt{Area} part of the plot by add \textbf{arguments} to the \texttt{points()} statement.
 
@@ -1559,7 +1601,7 @@ I can now customize the sea ice \texttt{Area} part of the plot by add \textbf{ar
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-60-1.pdf}
+\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-62-1.pdf}
 
 ❓ There's a problem with my graph though - can you spot it? It only really becomes apparent when you connect the dots with a line. ❓
 
@@ -1578,7 +1620,7 @@ So, to set the y-axis limits we do this:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-61-1.pdf}
+\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-63-1.pdf}
 
 Now we have a bunch more space at the bottom. We can add our \texttt{points()} back to see if this work:
 
@@ -1593,7 +1635,7 @@ Now we have a bunch more space at the bottom. We can add our \texttt{points()} b
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-62-1.pdf}
+\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-64-1.pdf}
 
 ⚠️ \textbf{Note:} \texttt{ylim\ =\ ...} only goes in \texttt{plot()}, not \texttt{points()}. \texttt{View()} ⚠️
 
@@ -1621,7 +1663,7 @@ Let's re-make our fancy plots now with \texttt{ylim\ =\ ...} set.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-63-1.pdf}
+\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-65-1.pdf}
 
 \hypertarget{you-try-it}{%
 \section{You try it}\label{you-try-it}}

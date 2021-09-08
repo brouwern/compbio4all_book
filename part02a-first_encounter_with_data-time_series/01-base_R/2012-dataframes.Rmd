@@ -90,3 +90,19 @@ min(SeaIce$Extent)
 max(SeaIce$Extent)
 ```
 
+
+## Accessing rows and columns of dataframes
+
+First row
+```{r}
+SeaIce[1, ]
+```
+
+First column
+
+```{r}
+SeaIce[ , 1] # with brackets
+SeaIce$Year  # with $
+```
+
+

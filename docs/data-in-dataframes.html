@@ -24,7 +24,7 @@
 <meta name="author" content="Nathan L. BRouwer" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -240,6 +240,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2" data-path="data-in-dataframes.html"><a href="data-in-dataframes.html#looking-at-dataframes-in-the-console"><i class="fa fa-check"></i><b>8.2</b> Looking at dataframes in the console</a></li>
 <li class="chapter" data-level="8.3" data-path="data-in-dataframes.html"><a href="data-in-dataframes.html#examining-part-of-a-dataframe"><i class="fa fa-check"></i><b>8.3</b> Examining part of a dataframe</a></li>
 <li class="chapter" data-level="8.4" data-path="data-in-dataframes.html"><a href="data-in-dataframes.html#get-information-about-dataframes"><i class="fa fa-check"></i><b>8.4</b> Get information about dataframes</a></li>
+<li class="chapter" data-level="8.5" data-path="data-in-dataframes.html"><a href="data-in-dataframes.html#accessing-rows-and-columns-of-dataframes"><i class="fa fa-check"></i><b>8.5</b> Accessing rows and columns of dataframes</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="plotting-data-in-dataframes.html"><a href="plotting-data-in-dataframes.html"><i class="fa fa-check"></i><b>9</b> Plotting data in dataframes</a>
 <ul>
@@ -432,6 +433,22 @@ SeaIce, however, is a typical R data object in the form of a <strong>dataframe</
 <span id="cb38-6"><a href="data-in-dataframes.html#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(SeaIce<span class="sc">$</span>Extent)</span>
 <span id="cb38-7"><a href="data-in-dataframes.html#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(SeaIce<span class="sc">$</span>Extent)</span>
 <span id="cb38-8"><a href="data-in-dataframes.html#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(SeaIce<span class="sc">$</span>Extent)</span></code></pre></div>
+</div>
+<div id="accessing-rows-and-columns-of-dataframes" class="section level2" number="8.5">
+<h2><span class="header-section-number">8.5</span> Accessing rows and columns of dataframes</h2>
+<p>First row</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="data-in-dataframes.html#cb39-1" aria-hidden="true" tabindex="-1"></a>SeaIce[<span class="dv">1</span>, ]</span></code></pre></div>
+<pre><code>##   Year Extent Area t
+## 1 1979   7.22 4.54 1</code></pre>
+<p>First column</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="data-in-dataframes.html#cb41-1" aria-hidden="true" tabindex="-1"></a>SeaIce[ , <span class="dv">1</span>] <span class="co"># with brackets</span></span></code></pre></div>
+<pre><code>##  [1] 1979 1980 1981 1982 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993
+## [16] 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008
+## [31] 2009 2010 2011 2012 2013 2014 2015</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="data-in-dataframes.html#cb43-1" aria-hidden="true" tabindex="-1"></a>SeaIce<span class="sc">$</span>Year  <span class="co"># with $</span></span></code></pre></div>
+<pre><code>##  [1] 1979 1980 1981 1982 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993
+## [16] 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008
+## [31] 2009 2010 2011 2012 2013 2014 2015</code></pre>
 
 </div>
 </div>
