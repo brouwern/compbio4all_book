@@ -117,7 +117,7 @@
 
 \title{Computational Biology for All!}
 \author{Nathan L. BRouwer}
-\date{2021-09-08}
+\date{2021-09-10}
 
 \begin{document}
 \maketitle
@@ -1713,6 +1713,516 @@ Based on the code above, make a plot of the SeaIce data where \texttt{Area} appe
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{build-your-own-dataframe-part-i-vectors}{%
+\chapter{Build your own dataframe part I: Vectors}\label{build-your-own-dataframe-part-i-vectors}}
+
+\hypertarget{dataframes-are-a-type-of-data-structure}{%
+\section{Dataframes are a type of data structure}\label{dataframes-are-a-type-of-data-structure}}
+
+For small datasets its often useful to build your own dataframes. Dataframes are \textbf{objects} in R; in particular they are a type of \textbf{data structure}. ``Data structure'' is just a fancy way of saying ``holding or organizing data.''
+
+We'll work with the \texttt{SeaIce} data again.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(Stat2Data)}
+\FunctionTok{data}\NormalTok{(}\StringTok{"SeaIce"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+If we're curious about what kind of data is in an object we can use the \texttt{class()} command to see how is is classified.. Generally the first thing R spits out is the most important.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(SeaIce)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "data.frame"
+\end{verbatim}
+
+We see that \texttt{SeaIce\ is\ a}data.frame`.
+
+A related command is \texttt{is()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is}\NormalTok{(SeaIce)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "data.frame" "list"       "oldClass"   "vector"
+\end{verbatim}
+
+This command is more \textbf{verbose} and tells of several things, the most relevant of which is that \texttt{SeaIce} is a dataframe.
+
+The \texttt{SeaIce} dataframe has several columns. We can pull up their names using the \texttt{names()} command.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(SeaIce)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Year"   "Extent" "Area"   "t"
+\end{verbatim}
+
+There are times when we may want to examine just a single column. We can isolate a single column using a species notation which uses a dollar sign. To get the \texttt{Extent} column we do this
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SeaIce}\SpecialCharTok{$}\NormalTok{Extent}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 7.22 7.86 7.25 7.45 7.54 7.11 6.93 7.55 7.51 7.53 7.08 6.27 6.59 7.59 6.54
+## [16] 7.24 6.18 7.91 6.78 6.62 6.29 6.36 6.78 5.98 6.18 6.08 5.59 5.95 4.32 4.73
+## [31] 5.39 4.93 4.63 3.63 5.35 5.29 4.68
+\end{verbatim}
+
+\hypertarget{dataframes-are-made-from-vectors}{%
+\section{Dataframes are made from vectors}\label{dataframes-are-made-from-vectors}}
+
+Running this we get just a stream of numbers. In R, such a stream of numbers is called a \textbf{vector}. Like dataframes, vectors are a type of data structure. We can check this with \texttt{is()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is}\NormalTok{(SeaIce}\SpecialCharTok{$}\NormalTok{Extent)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric" "vector"
+\end{verbatim}
+
+The first result is \texttt{numeric}, which indicates that there are numbers in this vector; the second result is vector.
+
+All columns in a dataframe are are vectors:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is}\NormalTok{(SeaIce}\SpecialCharTok{$}\NormalTok{Year)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "integer"             "double"              "numeric"            
+## [4] "vector"              "data.frameRowLabels"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is}\NormalTok{(SeaIce}\SpecialCharTok{$}\NormalTok{Area)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric" "vector"
+\end{verbatim}
+
+\hypertarget{make-your-own-vectors}{%
+\section{Make your own vectors}\label{make-your-own-vectors}}
+
+We can make our own vectors using the \texttt{c()} command. (\texttt{c()} does MANY things in R, so we'll see it a lot).
+
+Here is some more recent data on the Canda Lynx from 1984 to 2002 (Poole 2003, Table 3):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{c}\NormalTok{(}\DecValTok{13445}\NormalTok{, }\DecValTok{8625}\NormalTok{, }\DecValTok{6853}\NormalTok{, }\DecValTok{6953}\NormalTok{, }\DecValTok{6574}\NormalTok{,}
+  \DecValTok{8265}\NormalTok{, }\DecValTok{9977}\NormalTok{, }\DecValTok{7579}\NormalTok{, }\DecValTok{11542}\NormalTok{, }\DecValTok{7180}\NormalTok{,}
+  \DecValTok{4713}\NormalTok{, }\DecValTok{4907}\NormalTok{, }\DecValTok{2819}\NormalTok{, }\DecValTok{5171}\NormalTok{, }\DecValTok{6873}\NormalTok{, }
+  \DecValTok{6148}\NormalTok{, }\DecValTok{8573}\NormalTok{, }\DecValTok{9361}\NormalTok{, }\DecValTok{11226}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 13445  8625  6853  6953  6574  8265  9977  7579 11542  7180  4713  4907
+## [13]  2819  5171  6873  6148  8573  9361 11226
+\end{verbatim}
+
+We can save this to an R object using a very species function in R called the \textbf{assigment operator}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lynx.ca }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{13445}\NormalTok{, }\DecValTok{8625}\NormalTok{, }\DecValTok{6853}\NormalTok{, }\DecValTok{6953}\NormalTok{, }\DecValTok{6574}\NormalTok{,}
+  \DecValTok{8265}\NormalTok{, }\DecValTok{9977}\NormalTok{, }\DecValTok{7579}\NormalTok{, }\DecValTok{11542}\NormalTok{, }\DecValTok{7180}\NormalTok{,}
+  \DecValTok{4713}\NormalTok{, }\DecValTok{4907}\NormalTok{, }\DecValTok{2819}\NormalTok{, }\DecValTok{5171}\NormalTok{, }\DecValTok{6873}\NormalTok{, }
+  \DecValTok{6148}\NormalTok{, }\DecValTok{8573}\NormalTok{, }\DecValTok{9361}\NormalTok{, }\DecValTok{11226}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We've now made a brand new object in R called \texttt{lynx.ca}. We can see what it is by just typing its name in the console\ldots{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lynx.ca}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 13445  8625  6853  6953  6574  8265  9977  7579 11542  7180  4713  4907
+## [13]  2819  5171  6873  6148  8573  9361 11226
+\end{verbatim}
+
+\ldots and confirming what it is with \texttt{is()} and \texttt{class()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is}\NormalTok{(lynx.ca)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric" "vector"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(lynx.ca)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+The data are from 1984 to 2002. We can make a \texttt{year} vector like this
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{year }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1984}\NormalTok{, }\DecValTok{1985}\NormalTok{, }\DecValTok{1986}\NormalTok{, }\DecValTok{1987}\NormalTok{,}
+          \DecValTok{1988}\NormalTok{, }\DecValTok{1989}\NormalTok{, }\DecValTok{1990}\NormalTok{, }\DecValTok{1991}\NormalTok{, }\DecValTok{1992}\NormalTok{, }
+          \DecValTok{1993}\NormalTok{, }\DecValTok{1994}\NormalTok{, }\DecValTok{1995}\NormalTok{, }\DecValTok{1996}\NormalTok{, }\DecValTok{1997}\NormalTok{,}
+          \DecValTok{1998}\NormalTok{, }\DecValTok{1999}\NormalTok{, }\DecValTok{2000}\NormalTok{, }\DecValTok{2001}\NormalTok{, }\DecValTok{2002}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Its rather tedious to do that, so R has a trick. If we want a sequence of numbers we can use the \texttt{seq()} command, which has the arguments \texttt{from\ =...} and \texttt{to\ =\ ...}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{year }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\AttributeTok{from =} \DecValTok{1984}\NormalTok{, }\AttributeTok{to =} \DecValTok{2002}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{checking-the-length-of-vectors}{%
+\section{Checking the length of vectors}\label{checking-the-length-of-vectors}}
+
+Typing in data directly into R is errorprone and whenever we do it we should check our work carefully. A first check should be that we entered in all the numbers; we can do this by getting R to tell us the length of the vector. Can you guess what the command is called?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(lynx.ca)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 19
+\end{verbatim}
+
+Let's check that our year vector is the same length
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(year)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 19
+\end{verbatim}
+
+\hypertarget{another-example}{%
+\section{Another example}\label{another-example}}
+
+Another famous example
+
+Howlett and Majerus. 1987. The understanding of industrial melanism in the peppered moth (\emph{Biston betularia}) .(Lepidoptera: Geometridae). 30: 31-44.
+
+Table 2
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{year.ne }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1954}\NormalTok{, }\DecValTok{1961}\NormalTok{, }\DecValTok{1970}\NormalTok{, }\DecValTok{1975}\NormalTok{, }\DecValTok{1981}\NormalTok{, }\DecValTok{1982}\NormalTok{, }\DecValTok{1983}\NormalTok{, }\DecValTok{1984}\NormalTok{, }\DecValTok{1985}\NormalTok{)}
+
+\NormalTok{moths.ne }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{92.95}\NormalTok{, }\FloatTok{94.78}\NormalTok{, }\DecValTok{75}\NormalTok{, }\FloatTok{64.7}\NormalTok{, }\FloatTok{45.9}\NormalTok{, }\DecValTok{50}\NormalTok{, }\FloatTok{42.9}\NormalTok{, }\FloatTok{42.1}\NormalTok{, }\FloatTok{39.6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+(Raw data is slightly more complicated, but this works)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(year.ne)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(moths.ne)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{moths }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(year.ne,}
+\NormalTok{                    moths.ne)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(moths.ne }\SpecialCharTok{\textasciitilde{}}\NormalTok{ year.ne, }\AttributeTok{data =}\NormalTok{ moths)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-88-1.pdf}
+
+Not how R doesn't need extra space for the years where there are no data
+
+\hypertarget{try-it-yourself}{%
+\section{Try it yourself}\label{try-it-yourself}}
+
+The original lynx data that comes with R spans the year 1821--1934. Make a sequence of numbers called year.lynx using the \texttt{seq()} command.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1957}\SpecialCharTok{:}\DecValTok{1964}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1957 1958 1959 1960 1961 1962 1963 1964
+\end{verbatim}
+
+There was a hypothesis that sunspot number and/or size impact lynx populations. R has a dataset called sunspots that runs from 1749 to 1983. Make a vector called year year.sunspot using the \texttt{seq()} command.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1749}\SpecialCharTok{:}\DecValTok{1983}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1] 1749 1750 1751 1752 1753 1754 1755 1756 1757 1758 1759 1760 1761 1762 1763
+##  [16] 1764 1765 1766 1767 1768 1769 1770 1771 1772 1773 1774 1775 1776 1777 1778
+##  [31] 1779 1780 1781 1782 1783 1784 1785 1786 1787 1788 1789 1790 1791 1792 1793
+##  [46] 1794 1795 1796 1797 1798 1799 1800 1801 1802 1803 1804 1805 1806 1807 1808
+##  [61] 1809 1810 1811 1812 1813 1814 1815 1816 1817 1818 1819 1820 1821 1822 1823
+##  [76] 1824 1825 1826 1827 1828 1829 1830 1831 1832 1833 1834 1835 1836 1837 1838
+##  [91] 1839 1840 1841 1842 1843 1844 1845 1846 1847 1848 1849 1850 1851 1852 1853
+## [106] 1854 1855 1856 1857 1858 1859 1860 1861 1862 1863 1864 1865 1866 1867 1868
+## [121] 1869 1870 1871 1872 1873 1874 1875 1876 1877 1878 1879 1880 1881 1882 1883
+## [136] 1884 1885 1886 1887 1888 1889 1890 1891 1892 1893 1894 1895 1896 1897 1898
+## [151] 1899 1900 1901 1902 1903 1904 1905 1906 1907 1908 1909 1910 1911 1912 1913
+## [166] 1914 1915 1916 1917 1918 1919 1920 1921 1922 1923 1924 1925 1926 1927 1928
+## [181] 1929 1930 1931 1932 1933 1934 1935 1936 1937 1938 1939 1940 1941 1942 1943
+## [196] 1944 1945 1946 1947 1948 1949 1950 1951 1952 1953 1954 1955 1956 1957 1958
+## [211] 1959 1960 1961 1962 1963 1964 1965 1966 1967 1968 1969 1970 1971 1972 1973
+## [226] 1974 1975 1976 1977 1978 1979 1980 1981 1982 1983
+\end{verbatim}
+
+\hypertarget{a-complicate-dataframe-to-make}{%
+\section{A complicate dataframe to make}\label{a-complicate-dataframe-to-make}}
+
+\hypertarget{build-the-dataframe}{%
+\section{Build the dataframe}\label{build-the-dataframe}}
+
+This code makes all of the columns and makes a dataframe
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{aa        }\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}C\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}D\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}E\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}F\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}G\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}H\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}I\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}K\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}L\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}M\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}N\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}P\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}Q\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}R\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}S\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}T\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}V\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}W\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}Y\textquotesingle{}}\NormalTok{)}
+\NormalTok{MW.da     }\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{89}\NormalTok{,}\DecValTok{121}\NormalTok{,}\DecValTok{133}\NormalTok{,}\DecValTok{146}\NormalTok{,}\DecValTok{165}\NormalTok{,}\DecValTok{75}\NormalTok{,}\DecValTok{155}\NormalTok{,}\DecValTok{131}\NormalTok{,}\DecValTok{146}\NormalTok{,}\DecValTok{131}\NormalTok{,}\DecValTok{149}\NormalTok{,}\DecValTok{132}\NormalTok{,}\DecValTok{115}\NormalTok{,}\DecValTok{147}\NormalTok{,}\DecValTok{174}\NormalTok{,}\DecValTok{105}\NormalTok{,}\DecValTok{119}\NormalTok{,}\DecValTok{117}\NormalTok{,}\DecValTok{204}\NormalTok{,}\DecValTok{181}\NormalTok{)}
+\NormalTok{volume    }\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{67}\NormalTok{,}\DecValTok{86}\NormalTok{,}\DecValTok{91}\NormalTok{,}\DecValTok{109}\NormalTok{,}\DecValTok{135}\NormalTok{,}\DecValTok{48}\NormalTok{,}\DecValTok{118}\NormalTok{,}\DecValTok{124}\NormalTok{,}\DecValTok{135}\NormalTok{,}\DecValTok{124}\NormalTok{,}\DecValTok{124}\NormalTok{,}\DecValTok{96}\NormalTok{,}\DecValTok{90}\NormalTok{,}
+              \DecValTok{114}\NormalTok{,}\DecValTok{148}\NormalTok{,}\DecValTok{73}\NormalTok{,}\DecValTok{93}\NormalTok{,}\DecValTok{105}\NormalTok{,}\DecValTok{163}\NormalTok{,}\DecValTok{141}\NormalTok{)}
+\NormalTok{bulkiness }\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\FloatTok{11.5}\NormalTok{,}\FloatTok{13.46}\NormalTok{,}\FloatTok{11.68}\NormalTok{,}\FloatTok{13.57}\NormalTok{,}\FloatTok{19.8}\NormalTok{,}\FloatTok{3.4}\NormalTok{,}\FloatTok{13.69}\NormalTok{,}\FloatTok{21.4}\NormalTok{,}
+              \FloatTok{15.71}\NormalTok{,}\FloatTok{21.4}\NormalTok{,}\FloatTok{16.25}\NormalTok{,}\FloatTok{12.28}\NormalTok{,}\FloatTok{17.43}\NormalTok{,}
+              \FloatTok{14.45}\NormalTok{,}\FloatTok{14.28}\NormalTok{,}\FloatTok{9.47}\NormalTok{,}\FloatTok{15.77}\NormalTok{,}\FloatTok{21.57}\NormalTok{,}\FloatTok{21.67}\NormalTok{,}\FloatTok{18.03}\NormalTok{)}
+\NormalTok{polarity  }\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{1.48}\NormalTok{,}\FloatTok{49.7}\NormalTok{,}\FloatTok{49.9}\NormalTok{,}\FloatTok{0.35}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{51.6}\NormalTok{,}\FloatTok{0.13}\NormalTok{,}\FloatTok{49.5}\NormalTok{,}\FloatTok{0.13}\NormalTok{,}
+              \FloatTok{1.43}\NormalTok{,}\FloatTok{3.38}\NormalTok{,}\FloatTok{1.58}\NormalTok{,}\FloatTok{3.53}\NormalTok{,}\DecValTok{52}\NormalTok{,}\FloatTok{1.67}\NormalTok{,}\FloatTok{1.66}\NormalTok{,}\FloatTok{0.13}\NormalTok{,}\FloatTok{2.1}\NormalTok{,}\FloatTok{1.61}\NormalTok{)}
+\NormalTok{isoelectric.pt }\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{,}\FloatTok{5.07}\NormalTok{,}\FloatTok{2.77}\NormalTok{,}\FloatTok{3.22}\NormalTok{,}\FloatTok{5.48}\NormalTok{,}\FloatTok{5.97}\NormalTok{,}\FloatTok{7.59}\NormalTok{,}\FloatTok{6.02}\NormalTok{,}\FloatTok{9.74}\NormalTok{,}\FloatTok{5.98}\NormalTok{,}
+                   \FloatTok{5.74}\NormalTok{,}\FloatTok{5.41}\NormalTok{,}\FloatTok{6.3}\NormalTok{,}\FloatTok{5.65}\NormalTok{,}\FloatTok{10.76}\NormalTok{,}\FloatTok{5.68}\NormalTok{,}\FloatTok{6.16}\NormalTok{,}\FloatTok{5.96}\NormalTok{,}\FloatTok{5.89}\NormalTok{,}\FloatTok{5.66}\NormalTok{)}
+\NormalTok{hydrophobe}\FloatTok{.34} \OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\FloatTok{1.8}\NormalTok{,}\FloatTok{2.5}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{3.5}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{3.5}\NormalTok{,}\FloatTok{2.8}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{0.4}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{3.2}\NormalTok{,}\FloatTok{4.5}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{3.9}\NormalTok{,}\FloatTok{3.8}\NormalTok{,}\FloatTok{1.9}\NormalTok{,}
+                  \SpecialCharTok{{-}}\FloatTok{3.5}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{1.6}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{3.5}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{4.5}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{0.8}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{0.7}\NormalTok{,}\FloatTok{4.2}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{0.9}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{1.3}\NormalTok{)}
+\NormalTok{hydrophobe}\FloatTok{.35} \OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\FloatTok{1.6}\NormalTok{,}\DecValTok{2}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{9.2}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{8.2}\NormalTok{,}\FloatTok{3.7}\NormalTok{,}\DecValTok{1}\NormalTok{,}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{,}\FloatTok{3.1}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{8.8}\NormalTok{,}\FloatTok{2.8}\NormalTok{,}\FloatTok{3.4}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{4.8}\NormalTok{,}
+                  \SpecialCharTok{{-}}\FloatTok{0.2}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{4.1}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{12.3}\NormalTok{,}\FloatTok{0.6}\NormalTok{,}\FloatTok{1.2}\NormalTok{,}\FloatTok{2.6}\NormalTok{,}\FloatTok{1.9}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{0.7}\NormalTok{)}
+\NormalTok{saaH2O       }\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{113}\NormalTok{,}\DecValTok{140}\NormalTok{,}\DecValTok{151}\NormalTok{,}\DecValTok{183}\NormalTok{,}\DecValTok{218}\NormalTok{,}\DecValTok{85}\NormalTok{,}\DecValTok{194}\NormalTok{,}\DecValTok{182}\NormalTok{,}\DecValTok{211}\NormalTok{,}\DecValTok{180}\NormalTok{,}\DecValTok{204}\NormalTok{,}\DecValTok{158}\NormalTok{,}
+                 \DecValTok{143}\NormalTok{,}\DecValTok{189}\NormalTok{,}\DecValTok{241}\NormalTok{,}\DecValTok{122}\NormalTok{,}\DecValTok{146}\NormalTok{,}\DecValTok{160}\NormalTok{,}\DecValTok{259}\NormalTok{,}\DecValTok{229}\NormalTok{)}
+\NormalTok{faal.fold    }\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\FloatTok{0.74}\NormalTok{,}\FloatTok{0.91}\NormalTok{,}\FloatTok{0.62}\NormalTok{,}\FloatTok{0.62}\NormalTok{,}\FloatTok{0.88}\NormalTok{,}\FloatTok{0.72}\NormalTok{,}\FloatTok{0.78}\NormalTok{,}\FloatTok{0.88}\NormalTok{,}\FloatTok{0.52}\NormalTok{,}
+                 \FloatTok{0.85}\NormalTok{,}\FloatTok{0.85}\NormalTok{,}\FloatTok{0.63}\NormalTok{,}\FloatTok{0.64}\NormalTok{,}\FloatTok{0.62}\NormalTok{,}\FloatTok{0.64}\NormalTok{,}\FloatTok{0.66}\NormalTok{,}\FloatTok{0.7}\NormalTok{,}\FloatTok{0.86}\NormalTok{,}\FloatTok{0.85}\NormalTok{,}\FloatTok{0.76}\NormalTok{)}
+\NormalTok{polar.req    }\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{,}\FloatTok{4.8}\NormalTok{,}\DecValTok{13}\NormalTok{,}\FloatTok{12.5}\NormalTok{,}\DecValTok{5}\NormalTok{,}\FloatTok{7.9}\NormalTok{,}\FloatTok{8.4}\NormalTok{,}\FloatTok{4.9}\NormalTok{,}\FloatTok{10.1}\NormalTok{,}\FloatTok{4.9}\NormalTok{,}\FloatTok{5.3}\NormalTok{,}\DecValTok{10}\NormalTok{,}
+                 \FloatTok{6.6}\NormalTok{,}\FloatTok{8.6}\NormalTok{,}\FloatTok{9.1}\NormalTok{,}\FloatTok{7.5}\NormalTok{,}\FloatTok{6.6}\NormalTok{,}\FloatTok{5.6}\NormalTok{,}\FloatTok{5.2}\NormalTok{,}\FloatTok{5.4}\NormalTok{)}
+\NormalTok{freq        }\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\FloatTok{7.8}\NormalTok{,}\FloatTok{1.1}\NormalTok{,}\FloatTok{5.19}\NormalTok{,}\FloatTok{6.72}\NormalTok{,}\FloatTok{4.39}\NormalTok{,}\FloatTok{6.77}\NormalTok{,}\FloatTok{2.03}\NormalTok{,}\FloatTok{6.95}\NormalTok{,}\FloatTok{6.32}\NormalTok{,}
+                \FloatTok{10.15}\NormalTok{,}\FloatTok{2.28}\NormalTok{,}\FloatTok{4.37}\NormalTok{,}\FloatTok{4.26}\NormalTok{,}\FloatTok{3.45}\NormalTok{,}\FloatTok{5.23}\NormalTok{,}\FloatTok{6.46}\NormalTok{,}\FloatTok{5.12}\NormalTok{,}\FloatTok{7.01}\NormalTok{,}\FloatTok{1.09}\NormalTok{,}\FloatTok{3.3}\NormalTok{)}
+\NormalTok{charge}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}un\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}un\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}neg\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}neg\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}un\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}un\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}pos\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}un\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}pos\textquotesingle{}}\NormalTok{,}
+          \StringTok{\textquotesingle{}un\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}un\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}un\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}un\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}un\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}pos\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}un\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}un\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}un\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}un\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}un\textquotesingle{}}\NormalTok{)}
+\NormalTok{hydropathy}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}hydrophobic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}hydrophobic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}hydrophilic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}hydrophilic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}hydrophobic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}neutral\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}neutral\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}hydrophobic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}hydrophilic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}hydrophobic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}hydrophobic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}hydrophilic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}neutral\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}hydrophilic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}hydrophilic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}neutral\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}neutral\textquotesingle{}}\NormalTok{,}
+              \StringTok{\textquotesingle{}hydrophobic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}hydrophobic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}neutral\textquotesingle{}}\NormalTok{)}
+\NormalTok{volume.cat}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}verysmall\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}small\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}small\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}medium\textquotesingle{}}\NormalTok{,}
+              \StringTok{\textquotesingle{}verylarge\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}verysmall\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}medium\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}large\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}large\textquotesingle{}}\NormalTok{,}
+              \StringTok{\textquotesingle{}large\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}large\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}small\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}small\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}medium\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}large\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}verysmall\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}small\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}medium\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}verylarge\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}verylarge\textquotesingle{}}\NormalTok{)}
+\NormalTok{polarity.cat}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}nonpolar\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}nonpolar\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}polar\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}polar\textquotesingle{}}\NormalTok{,}
+                \StringTok{\textquotesingle{}nonpolar\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}nonpolar\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}polar\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}nonpolar\textquotesingle{}}\NormalTok{,}
+                \StringTok{\textquotesingle{}polar\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}nonpolar\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}nonpolar\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}polar\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}nonpolar\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}polar\textquotesingle{}}\NormalTok{,}
+                \StringTok{\textquotesingle{}polar\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}polar\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}polar\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}nonpolar\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}nonpolar\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}polar\textquotesingle{}}\NormalTok{)}
+\NormalTok{chemical}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}aliphatic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}sulfur\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}acidic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}acidic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}aromatic\textquotesingle{}}\NormalTok{,}
+            \StringTok{\textquotesingle{}aliphatic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}basic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}aliphatic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}basic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}aliphatic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}sulfur\textquotesingle{}}\NormalTok{,}
+            \StringTok{\textquotesingle{}amide\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}aliphatic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}amide\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}basic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}hydroxyl\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}hydroxyl\textquotesingle{}}\NormalTok{,}
+            \StringTok{\textquotesingle{}aliphatic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}aromatic\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}aromatic\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{aa\_dat }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(aa,MW.da,volume,bulkiness,}
+\NormalTok{polarity,isoelectric.pt,hydrophobe}\FloatTok{.34}\NormalTok{,hydrophobe}\FloatTok{.35}\NormalTok{,}
+\NormalTok{saaH2O,faal.fold, polar.req,freq,charge,hydropathy,volume.cat,polarity.cat,chemical)}
+\end{Highlighting}
+\end{Shaded}
+
+Try plotting one numeric variable against another.
+
+\hypertarget{factors}{%
+\subsection{Factors}\label{factors}}
+
+The amino acid data contains both \textbf{numeric} data and vectors of words that represent categories or groups of similar amino acids. When the dataframe first is created R doesn't do anything with it. For example, if we look at a numeric variable, we get this summary information
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(aa\_dat}\SpecialCharTok{$}\NormalTok{MW.da)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    75.0   118.5   132.5   136.8   150.5   204.0
+\end{verbatim}
+
+If we do the same summary command on a column of text we get this
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(aa\_dat}\SpecialCharTok{$}\NormalTok{hydropathy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Length     Class      Mode 
+##        20 character character
+\end{verbatim}
+
+We can help R make sense of this columns usin the command factor().
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{aa\_dat}\SpecialCharTok{$}\NormalTok{hydropathy }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(aa\_dat}\SpecialCharTok{$}\NormalTok{hydropathy)}
+\end{Highlighting}
+\end{Shaded}
+
+Note that on the right is the command
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{factor}\NormalTok{(aa\_dat}\SpecialCharTok{$}\NormalTok{hydropathy)}
+\end{Highlighting}
+\end{Shaded}
+
+and on the left we are assigning the output of this function back onto the original column, thus telling R that the words in this column represent group or categories.
+(The term ``factor'' comes from statistics and isn't very helpful about what's going on.)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(aa\_dat}\SpecialCharTok{$}\NormalTok{hydropathy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## hydrophilic hydrophobic     neutral 
+##           6           8           6
+\end{verbatim}
+
+Note that if I do this
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{aa\_dat }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(aa\_dat}\SpecialCharTok{$}\NormalTok{hydropathy)}
+\end{Highlighting}
+\end{Shaded}
+
+I \textbf{overwrite} the entire aa\_dat dataframe object with the data of just the aa\_dat\$hydropathy column.
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+Poole, Kim G. 2003. A review of the Canada Lynx, \emph{Lynx canadensis} ,in Canada. Canadian {[}Field-Naturalist 117: 360-376.{[}(\url{https://www.canadianfieldnaturalist.ca/index.php/cfn/article/view/738}){]} DOI: \url{https://doi.org/10.22621/cfn.v117i3.738}
+
+\hypertarget{build-your-own-dataframe}{%
+\chapter{Build your own dataframe}\label{build-your-own-dataframe}}
+
+Build a dataframe from the data below and practice making plots
+
+Number of lynx
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lynx.ca }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{13445}\NormalTok{, }\DecValTok{8625}\NormalTok{, }\DecValTok{6853}\NormalTok{, }\DecValTok{6953}\NormalTok{, }\DecValTok{6574}\NormalTok{,}
+  \DecValTok{8265}\NormalTok{, }\DecValTok{9977}\NormalTok{, }\DecValTok{7579}\NormalTok{, }\DecValTok{11542}\NormalTok{, }\DecValTok{7180}\NormalTok{,}
+  \DecValTok{4713}\NormalTok{, }\DecValTok{4907}\NormalTok{, }\DecValTok{2819}\NormalTok{, }\DecValTok{5171}\NormalTok{, }\DecValTok{6873}\NormalTok{, }
+  \DecValTok{6148}\NormalTok{, }\DecValTok{8573}\NormalTok{, }\DecValTok{9361}\NormalTok{, }\DecValTok{11226}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Year of study
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{year }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1984}\NormalTok{, }\DecValTok{1985}\NormalTok{, }\DecValTok{1986}\NormalTok{, }\DecValTok{1987}\NormalTok{,}
+          \DecValTok{1988}\NormalTok{, }\DecValTok{1989}\NormalTok{, }\DecValTok{1990}\NormalTok{, }\DecValTok{1991}\NormalTok{, }\DecValTok{1992}\NormalTok{, }
+          \DecValTok{1993}\NormalTok{, }\DecValTok{1994}\NormalTok{, }\DecValTok{1995}\NormalTok{, }\DecValTok{1996}\NormalTok{, }\DecValTok{1997}\NormalTok{,}
+          \DecValTok{1998}\NormalTok{, }\DecValTok{1999}\NormalTok{, }\DecValTok{2000}\NormalTok{, }\DecValTok{2001}\NormalTok{, }\DecValTok{2002}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Make the dataframe.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lynx.new }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(lynx.ca,}
+\NormalTok{                    year)}
+\end{Highlighting}
+\end{Shaded}
+
+Build a basic plot
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(lynx.ca }\SpecialCharTok{\textasciitilde{}}\NormalTok{ year, }\AttributeTok{data =}\NormalTok{ lynx.new)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{compbio4all-book_files/figure-latex/unnamed-chunk-101-1.pdf}
+
+As in the lynx dataset that comes with R, we see wild swings in abundance over short periods of time.
+
+\hypertarget{your-turn-1}{%
+\section{Your turn}\label{your-turn-1}}
+
+Make this plot nice. Change the x axis label, y axis label, give it a main title, etc.
+
+\hypertarget{references-1}{%
+\section{References}\label{references-1}}
+
+Poole, Kim G. 2003. A review of the Canada Lynx, \emph{Lynx canadensis} ,in Canada. Canadian {[}Field-Naturalist 117: 360-376.{[}(\url{https://www.canadianfieldnaturalist.ca/index.php/cfn/article/view/738}){]} DOI: \url{https://doi.org/10.22621/cfn.v117i3.738}
 
   \bibliography{book.bib,packages.bib}
 

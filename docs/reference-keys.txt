@@ -78,3 +78,17 @@ you-try-it
 fixer-uppers
 intermediate
 advanced
+build-your-own-dataframe-part-i-vectors
+dataframes-are-a-type-of-data-structure
+dataframes-are-made-from-vectors
+make-your-own-vectors
+checking-the-length-of-vectors
+another-example
+try-it-yourself
+a-complicate-dataframe-to-make
+build-the-dataframe
+factors
+references
+build-your-own-dataframe
+your-turn-1
+references-1
